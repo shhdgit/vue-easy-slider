@@ -8,11 +8,11 @@
     "vue-slider",
     "slider"
   ],
-  "homepage": "http://github.com/",
+  "homepage": "https://github.com/shhdgit/vue-easy-slider",
   "author": "Suhaha < jklopsdfw@gmail.com >",
   "repository": {
     "type": "git",
-    "url": "git@github.com:"
+    "url": "git@github.com:shhdgit/vue-easy-slider.git"
   },
   "licenses": "MIT",
   "main": "index.js",

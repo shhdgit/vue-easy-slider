@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<style lang="less" scoped>
+<style scoped>
   .slider-item {
     float: left;
 
