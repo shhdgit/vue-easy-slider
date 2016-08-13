@@ -75,7 +75,7 @@ Slider：
       <td>auto</td>
       <td>Boolean</td>
       <td>true</td>
-      <td>Auto play</td>
+      <td>Autoplay</td>
     </tr>
     <tr>
       <td>indicators</td>

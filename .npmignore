@@ -1,6 +1,9 @@
-src
+src/
 .babelrc
-.gitignore
-.npmignore
 webpack.config.js
-node_modules
+.npmignore
+.DS_Store
+.idea/
+node_modules/
+npm-debug.log
+
