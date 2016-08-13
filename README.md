@@ -25,7 +25,7 @@ new Vue( {
 ```
 
 ```HTML
-<slider width="400px"
+<slider width="800px"
         :interval="1000">
   <slider-item :style="backgroundColor: #3f51b5"></slider-item>
   <slider-item :style="backgroundColor: #eee"></slider-item>
