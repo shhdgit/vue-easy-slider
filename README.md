@@ -2,6 +2,10 @@
 
 vue-easy-slider is a slider component of Vue.js.
 
+## Demo
+
+[fiddle](https://jsfiddle.net/su9zv0w9/)
+
 ## Install
 
 ```bash
@@ -27,9 +31,9 @@ new Vue( {
 ```HTML
 <slider width="800px"
         :interval="1000">
-  <slider-item :style="backgroundColor: #3f51b5"></slider-item>
-  <slider-item :style="backgroundColor: #eee"></slider-item>
-  <slider-item :style="backgroundColor: #f44336"></slider-item>
+  <slider-item :style="{ backgroundColor: '#3f51b5' }"></slider-item>
+  <slider-item :style="{ backgroundColor: '#eee' }"></slider-item>
+  <slider-item :style="{ backgroundColor: '#f44336' }"></slider-item>
 </slider>
 ```
 
