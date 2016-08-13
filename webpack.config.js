@@ -30,11 +30,6 @@ module.exports = {
       }
     ]
   },
-  vue: {
-    loaders: {
-      js: 'babel'
-    }
-  },
   plugins: [
     new webpack.optimize.UglifyJsPlugin( {
       minimize : true,
