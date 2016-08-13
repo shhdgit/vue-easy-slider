@@ -2,7 +2,7 @@
   <div class="slider"
        :style="{ width: width, height: height }">
     <div class="slider-content"
-         :style="{ width: $children.length * 100 + '%', transition: 'margin ' + thisSpeed + 's' }"
+         :style="{ width: $children.length * parentWidth + 'px', transition: 'margin ' + thisSpeed + 's' }"
          v-el:content>
       <slot></slot>
     </div>
