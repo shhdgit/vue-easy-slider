@@ -3,8 +3,11 @@ const webpack = require( 'webpack' )
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: './',
-    filename: 'index.js'
+    path: './dist/',
+    filename: 'index.js',
+    library: 'vue-easy-slider',
+    libraryTarget: 'umd',
+    umdNamedDefine: true
   },
   resolve: {
     extensions: [ '', '.js', '.vue' ]
@@ -26,6 +29,11 @@ module.exports = {
         loader: 'style!css'
       }
     ]
+  },
+  vue: {
+    loaders: {
+      js: 'babel'
+    }
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin( {
