@@ -92,5 +92,37 @@ Slider：
   </tbody>
 </table>
 
+## Slots
+
+SliderItem：
+
+<table>
+  <thead>
+  <tr>
+    <th>name</th>
+    <th>description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>default</td>
+      <td>Item's content</td>
+    </tr>
+  </tbody>
+</table>
+
+usage:
+```HTML
+<slider>
+  <slider-item>
+    <div>
+      <img src="">
+      <p></p>
+      <button></button>
+    </div>
+  </slider-item>
+</slider>
+```
+
 # License
 MIT
