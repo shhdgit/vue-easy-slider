@@ -2,7 +2,7 @@
   <div class="slider"
        :style="{ width: width, height: height }">
     <div class="slider-content"
-         :style="{ width: $children.length * parentWidth + 'px', transition: 'margin ' + thisSpeed + 's' }"
+         :style="{ width: $children.length * thisWidth + 'px', transition: 'margin ' + thisSpeed + 's' }"
          v-el:content>
       <slot></slot>
     </div>
@@ -75,6 +75,14 @@
 
         return speed.toFixed( 2 )
       },
+      thisWidth () {
+        // Choose parent element width or user config width as Slider Item width.
+        if ( this.width === 'auto' ) {
+          return this.parentWidth
+        } else {
+          return parseInt( this.width )
+        }
+      },
       indicatorClass () {
         if ( this.indicators ) {
           return `slider-${ this.indicators }`
@@ -84,15 +92,15 @@
 
     methods: {
       scaleWidth () {
+        // Set parentWidth
+        this.parentWidth = this.$el.parentElement.clientWidth
+
         let sliderItem = this.$children,
-            width = this.$el.parentElement.clientWidth + 'px'
+            width = `${ this.thisWidth }px`
 
         sliderItem.forEach( item => {
           item.$el.style.width = width
         } )
-
-        // Parent element width, decide single slider-item's width
-        this.parentWidth = this.$el.parentElement.clientWidth
       },
       autoplay () {
         let timer
@@ -109,7 +117,7 @@
               _this.posFlag = 0
             }
 
-            content.style.marginLeft = _this.posFlag * -_this.parentWidth + 'px'
+            content.style.marginLeft = _this.posFlag * -_this.thisWidth + 'px'
           }, _this.interval )
         }
 
@@ -130,7 +138,7 @@
         let content = this.$els.content
 
         if ( this.posFlag < this.$children.length - 1 ) {
-          content.style.marginLeft = ++this.posFlag  * -this.parentWidth + 'px'
+          content.style.marginLeft = ++this.posFlag  * -this.thisWidth + 'px'
         } else {
           content.style.marginLeft = 0
           this.posFlag = 0
@@ -143,9 +151,9 @@
         let content = this.$els.content
 
         if ( this.posFlag > 0 ) {
-          content.style.marginLeft = --this.posFlag * -this.parentWidth + 'px'
+          content.style.marginLeft = --this.posFlag * -this.thisWidth + 'px'
         } else {
-          content.style.marginLeft = ( this.$children.length - 1 ) * -this.parentWidth + 'px'
+          content.style.marginLeft = ( this.$children.length - 1 ) * -this.thisWidth + 'px'
           this.posFlag = this.$children.length - 1
         }
 
@@ -154,7 +162,7 @@
       jump2 ( index ) {
         let content = this.$els.content
 
-        content.style.marginLeft = index * -this.parentWidth + 'px'
+        content.style.marginLeft = index * -this.thisWidth + 'px'
         this.posFlag = index
         this.autoplay()
       }
