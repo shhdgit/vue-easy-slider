@@ -2,7 +2,7 @@
   <div class="slider"
        :style="{ width: width, height: height }">
     <div class="slider-content"
-         :style="{ width: $children.length * thisWidth + 'px', transition: 'margin ' + thisSpeed + 's' }"
+         :style="{ width: childrenLength * thisWidth + 'px', transition: 'margin ' + thisSpeed + 's' }"
          v-el:content>
       <slot></slot>
     </div>
@@ -24,7 +24,7 @@
          @click.stop>
       <i class="slider-indicator-icon"
          :class="{ 'slider-indicator-active': posFlag === $index }"
-         v-for="i in $children"
+         v-for="i in childrenArr"
          @click="jump2( $index )"></i>
     </div>
   </div>
@@ -35,7 +35,9 @@
     data () {
       return {
         posFlag: 0,
-        parentWidth: ''
+        parentWidth: '',
+        childrenArr: [],
+        childrenLength: 0
       }
     },
 
@@ -66,6 +68,10 @@
       controlBtn: {
         type: Boolean,
         default: true
+      },
+      animation: {
+        type: String,
+        default: 'default'
       }
     },
 
@@ -102,16 +108,18 @@
           item.$el.style.width = width
         } )
       },
+      animate () {
+
+      },
       autoplay () {
         let timer
 
-        let length = this.$children.length,
-            content = this.$els.content,
+        let content = this.$els.content,
             _this = this
 
         function setTimer () {
           return setInterval( () => {
-            if ( _this.posFlag < length - 1 ) {
+            if ( _this.posFlag < _this.$children.length - 1 ) {
               _this.posFlag++
             } else {
               _this.posFlag = 0
@@ -127,7 +135,7 @@
             timer = setTimer()
           } else {
             // Config autoplay & slider item large than 1
-            if ( _this.auto && length > 1 ) {
+            if ( _this.auto && _this.$children.length > 1 ) {
               timer = setTimer()
             }
           }
@@ -164,6 +172,15 @@
 
         content.style.marginLeft = index * -this.thisWidth + 'px'
         this.posFlag = index
+        this.autoplay()
+      }
+    },
+
+    events: {
+      addChildrenLength () {
+        this.childrenLength++
+        this.childrenArr.push( this.childrenArr.length )
+        this.scaleWidth()
         this.autoplay()
       }
     },

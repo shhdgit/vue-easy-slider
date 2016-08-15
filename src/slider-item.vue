@@ -4,6 +4,14 @@
   </div>
 </template>
 
+<script>
+  export default {
+    ready () {
+      this.$dispatch( 'addChildrenLength' )
+    }
+  }
+</script>
+
 <style scoped>
   .slider-item {
     float: left;
