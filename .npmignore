@@ -1,9 +1,0 @@
-src/
-.babelrc
-webpack.config.js
-.npmignore
-.DS_Store
-.idea/
-node_modules/
-npm-debug.log
-

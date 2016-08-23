@@ -1,11 +1,13 @@
 <template>
   <div class="slider"
        :style="{ width: width, height: height }">
-    <div class="slider-content"
-         :style="{ width: childrenLength * thisWidth + 'px', transition: 'margin ' + thisSpeed + 's' }"
-         v-el:content>
+    <component :is="animation"
+               :style="{ transition: 'margin ' + thisSpeed + 's' }"
+               :speed="thisSpeed"
+               class="slider-content"
+               v-ref:content>
       <slot></slot>
-    </div>
+    </component>
 
     <div class="slider-btn slider-left-btn"
          @click.stop="preview"
@@ -31,11 +33,12 @@
 </template>
 
 <script>
+  import { normal, fade } from './animation'
+
   export default {
     data () {
       return {
         posFlag: 0,
-        parentWidth: '',
         childrenArr: [],
         childrenLength: 0
       }
@@ -71,7 +74,7 @@
       },
       animation: {
         type: String,
-        default: 'default'
+        default: 'normal'
       }
     },
 
@@ -81,14 +84,6 @@
 
         return speed.toFixed( 2 )
       },
-      thisWidth () {
-        // Choose parent element width or user config width as Slider Item width.
-        if ( this.width === 'auto' ) {
-          return this.parentWidth
-        } else {
-          return parseInt( this.width )
-        }
-      },
       indicatorClass () {
         if ( this.indicators ) {
           return `slider-${ this.indicators }`
@@ -97,35 +92,22 @@
     },
 
     methods: {
-      scaleWidth () {
-        // Set parentWidth
-        this.parentWidth = this.$el.parentElement.clientWidth
-
-        let sliderItem = this.$children,
-            width = `${ this.thisWidth }px`
-
-        sliderItem.forEach( item => {
-          item.$el.style.width = width
-        } )
-      },
-      animate () {
-
-      },
       autoplay () {
         let timer
 
-        let content = this.$els.content,
+        // Get animation's vm
+        let content = this.$refs.content,
             _this = this
 
         function setTimer () {
           return setInterval( () => {
-            if ( _this.posFlag < _this.$children.length - 1 ) {
+            if ( _this.posFlag < _this.$children.length - 2 ) {
               _this.posFlag++
             } else {
               _this.posFlag = 0
             }
 
-            content.style.marginLeft = _this.posFlag * -_this.thisWidth + 'px'
+            content.animation( _this.posFlag )
           }, _this.interval )
         }
 
@@ -134,8 +116,8 @@
             clearInterval( timer )
             timer = setTimer()
           } else {
-            // Config autoplay & slider item large than 1
-            if ( _this.auto && _this.$children.length > 1 ) {
+            // Config autoplay & slider item large than 2, coz slider is one of items
+            if ( _this.auto && _this.$children.length > 2 ) {
               timer = setTimer()
             }
           }
@@ -143,53 +125,73 @@
 
       },
       next () {
-        let content = this.$els.content
+        let content = this.$refs.content
 
-        if ( this.posFlag < this.$children.length - 1 ) {
-          content.style.marginLeft = ++this.posFlag  * -this.thisWidth + 'px'
+        if ( this.posFlag < this.$children.length - 2 ) {
+          ++this.posFlag
         } else {
-          content.style.marginLeft = 0
           this.posFlag = 0
         }
 
+        content.animation( this.posFlag )
         // Clean the Timer, reset autoplay's interval time.
         this.autoplay()
       },
       preview () {
-        let content = this.$els.content
+        let content = this.$refs.content
 
         if ( this.posFlag > 0 ) {
-          content.style.marginLeft = --this.posFlag * -this.thisWidth + 'px'
+          --this.posFlag
         } else {
-          content.style.marginLeft = ( this.$children.length - 1 ) * -this.thisWidth + 'px'
-          this.posFlag = this.$children.length - 1
+          this.posFlag = this.$children.length - 2
         }
 
+        content.animation( this.posFlag, 'preview' )
         this.autoplay()
       },
       jump2 ( index ) {
-        let content = this.$els.content
+        let content = this.$refs.content
 
-        content.style.marginLeft = index * -this.thisWidth + 'px'
+        content.animation( index, 'jump' )
         this.posFlag = index
         this.autoplay()
       }
     },
 
     events: {
+      scaleSliderWidth ( fn ) {
+        let _this = this
+
+        fn( this.$el.clientWidth, this.$children.length - 1 )
+        // For addChildrenLength()
+        this.scaleSliderWidth = function () {
+          fn( _this.$el.clientWidth, _this.$children.length - 1 )
+        }
+      },
       addChildrenLength () {
         this.childrenLength++
         this.childrenArr.push( this.childrenArr.length )
-        this.scaleWidth()
+
+        if ( this.animation === 'normal' ) {
+          this.scaleSliderWidth()
+        }
+
         this.autoplay()
+      },
+      scaleItemsWidth ( fn ) {
+        fn( this.$el.clientWidth )
       }
     },
 
     ready () {
-      this.scaleWidth()
       // Init autoplay function.
       this.autoplay = this.autoplay()
       this.autoplay()
+    },
+
+    components: {
+      normal,
+      fade
     }
   }
 </script>
@@ -239,6 +241,7 @@
   .slider-btn {
     position: absolute;
     top: 50%;
+    z-index: 99;
 
     transform: translateY( -50% );
     cursor: pointer;

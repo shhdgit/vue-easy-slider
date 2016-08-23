@@ -93,6 +93,12 @@ Slider：
       <td>true</td>
       <td>Show control button</td>
     </tr>
+    <tr>
+      <td>animation</td>
+      <td>String - { normal, fade }</td>
+      <td>normal</td>
+      <td>Show control button</td>
+    </tr>
   </tbody>
 </table>
 
