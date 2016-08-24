@@ -97,7 +97,7 @@ Slider：
       <td>animation</td>
       <td>String - { normal, fade }</td>
       <td>normal</td>
-      <td>Show control button</td>
+      <td>Change animation</td>
     </tr>
   </tbody>
 </table>
