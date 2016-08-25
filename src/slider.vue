@@ -2,7 +2,7 @@
   <div class="slider"
        :style="{ width: width, height: height }">
     <component :is="animation"
-               :style="{ transition: 'margin ' + thisSpeed + 's' }"
+               :style="{ transition: 'all ' + thisSpeed + 's' }"
                :speed="thisSpeed"
                class="slider-content"
                v-ref:content>

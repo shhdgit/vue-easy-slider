@@ -74,7 +74,6 @@ export default {
   },
 
   ready () {
-    console.log(this.$el.children)
     this.init()
   }
 }

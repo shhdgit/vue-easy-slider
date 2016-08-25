@@ -20,7 +20,7 @@ export default {
       this.$el.style.width = `${ totalWidth }px`
     },
     animation ( position ) {
-      this.$el.style.marginLeft = `${ position * -this.width }px`
+      this.$el.style.transform = `translateX( ${ position * -this.width }px )`
     }
   },
 
