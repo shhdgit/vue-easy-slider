@@ -19,8 +19,9 @@ export default {
       this.width = width
       this.$el.style.width = `${ totalWidth }px`
     },
-    animation ( position ) {
-      this.$el.style.transform = `translateX( ${ position * -this.width }px )`
+    animation ( origin, position, flag ) {
+      this.$el.style.transform = `translate3d( ${ position * -this.width }px, 0, 0 )`
+      this.$el.style.webkitTransform = `translate3d( ${ position * -this.width }px, 0, 0 )`
     }
   },
 

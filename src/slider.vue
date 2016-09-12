@@ -97,7 +97,8 @@
 
         // Get animation's vm
         let content = this.$refs.content,
-            _this = this
+            _this = this,
+            originPos = this.posFlag
 
         function setTimer () {
           return setInterval( () => {
@@ -107,7 +108,7 @@
               _this.posFlag = 0
             }
 
-            content.animation( _this.posFlag )
+            content.animation( originPos, _this.posFlag )
           }, _this.interval )
         }
 
@@ -125,7 +126,8 @@
 
       },
       next () {
-        let content = this.$refs.content
+        let content = this.$refs.content,
+            originPos = this.posFlag
 
         if ( this.posFlag < this.$children.length - 2 ) {
           ++this.posFlag
@@ -133,12 +135,13 @@
           this.posFlag = 0
         }
 
-        content.animation( this.posFlag )
+        content.animation( originPos, this.posFlag )
         // Clean the Timer, reset autoplay's interval time.
         this.autoplay()
       },
       preview () {
-        let content = this.$refs.content
+        let content = this.$refs.content,
+            originPos = this.posFlag
 
         if ( this.posFlag > 0 ) {
           --this.posFlag
@@ -146,13 +149,14 @@
           this.posFlag = this.$children.length - 2
         }
 
-        content.animation( this.posFlag, 'preview' )
+        content.animation( originPos, this.posFlag, 'preview' )
         this.autoplay()
       },
       jump2 ( index ) {
-        let content = this.$refs.content
+        let content = this.$refs.content,
+            originPos = this.posFlag
 
-        content.animation( index, 'jump' )
+        content.animation( originPos, index, 'jump' )
         this.posFlag = index
         this.autoplay()
       }

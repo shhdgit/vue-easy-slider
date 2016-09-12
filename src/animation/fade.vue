@@ -17,7 +17,7 @@ export default {
   },
 
   methods: {
-    animation ( position, flag ) {
+    animation ( origin, position, flag ) {
       let length = this.items.length
 
       function fade ( preview, next ) {
