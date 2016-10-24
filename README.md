@@ -1,15 +1,15 @@
 ## Intro
 
-vue-easy-slider is a slider component of Vue.js.
+vue-easy-slider is a slider component of Vue 2.x（[go 1.x](https://github.com/shhdgit/vue-easy-slider/tree/master)）.
 
 ## Demo
 
-[fiddle](https://jsfiddle.net/su9zv0w9/)
+[fiddle](https://jsfiddle.net/su9zv0w9/1/)
 
 ## Install
 
 ```bash
-$ npm install --save vue-easy-slider
+$ npm install --save vue-easy-slider@next
 ```
 
 ## Usage
@@ -30,7 +30,9 @@ new Vue( {
 
 ```HTML
 <slider width="800px"
-        :interval="1000">
+        animation="fade"
+        :interval="1000"
+        :speed="1000">
   <slider-item :style="{ backgroundColor: '#3f51b5' }"></slider-item>
   <slider-item :style="{ backgroundColor: '#eee' }"></slider-item>
   <slider-item :style="{ backgroundColor: '#f44336' }"></slider-item>
@@ -97,7 +99,7 @@ Slider：
       <td>animation</td>
       <td>String - { normal, fade }</td>
       <td>normal</td>
-      <td>Show control button</td>
+      <td>Change animation</td>
     </tr>
   </tbody>
 </table>

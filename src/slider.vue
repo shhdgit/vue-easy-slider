@@ -2,10 +2,10 @@
   <div class="slider"
        :style="{ width: width, height: height }">
     <component :is="animation"
-               :style="{ transition: 'margin ' + thisSpeed + 's' }"
+               :style="{ transition: 'all ' + thisSpeed + 's' }"
                :speed="thisSpeed"
                class="slider-content"
-               v-ref:content>
+               ref="content">
       <slot></slot>
     </component>
 
@@ -25,9 +25,9 @@
          :class="indicatorClass"
          @click.stop>
       <i class="slider-indicator-icon"
-         :class="{ 'slider-indicator-active': posFlag === $index }"
-         v-for="i in childrenArr"
-         @click="jump2( $index )"></i>
+         v-for="( item, index ) in childrenArr"
+         :class="{ 'slider-indicator-active': posFlag === index }"
+         @click="jump2( index )"></i>
     </div>
   </div>
 </template>
@@ -39,8 +39,7 @@
     data () {
       return {
         posFlag: 0,
-        childrenArr: [],
-        childrenLength: 0
+        childrenArr: []
       }
     },
 
@@ -97,17 +96,18 @@
 
         // Get animation's vm
         let content = this.$refs.content,
-            _this = this
+            _this = this,
+            originPos = this.posFlag
 
         function setTimer () {
           return setInterval( () => {
-            if ( _this.posFlag < _this.$children.length - 2 ) {
+            if ( _this.posFlag < content.$children.length - 1 ) {
               _this.posFlag++
             } else {
               _this.posFlag = 0
             }
 
-            content.animation( _this.posFlag )
+            content.animation( originPos, _this.posFlag )
           }, _this.interval )
         }
 
@@ -117,7 +117,7 @@
             timer = setTimer()
           } else {
             // Config autoplay & slider item large than 2, coz slider is one of items
-            if ( _this.auto && _this.$children.length > 2 ) {
+            if ( _this.auto && content.$children.length > 1 ) {
               timer = setTimer()
             }
           }
@@ -125,65 +125,60 @@
 
       },
       next () {
-        let content = this.$refs.content
+        let content = this.$refs.content,
+            originPos = this.posFlag
 
-        if ( this.posFlag < this.$children.length - 2 ) {
+        if ( this.posFlag < content.$children.length - 1 ) {
           ++this.posFlag
         } else {
           this.posFlag = 0
         }
 
-        content.animation( this.posFlag )
+        content.animation( originPos, this.posFlag )
         // Clean the Timer, reset autoplay's interval time.
         this.autoplay()
       },
       preview () {
-        let content = this.$refs.content
+        let content = this.$refs.content,
+            originPos = this.posFlag
 
         if ( this.posFlag > 0 ) {
           --this.posFlag
         } else {
-          this.posFlag = this.$children.length - 2
+          this.posFlag = content.$children.length - 1
         }
 
-        content.animation( this.posFlag, 'preview' )
+        content.animation( originPos, this.posFlag, 'preview' )
         this.autoplay()
       },
       jump2 ( index ) {
-        let content = this.$refs.content
+        let content = this.$refs.content,
+            originPos = this.posFlag
 
-        content.animation( index, 'jump' )
+        content.animation( originPos, index, 'jump' )
         this.posFlag = index
         this.autoplay()
+      },
+
+      addChildrenLength ( len ) {
+        for ( let i = 0; i < len; i++ ) {
+          this.childrenArr.push( this.childrenArr.length )
+        }
+      },
+      scaleItemsWidth ( items, width ) {
+        Array.prototype.forEach.call( items, item => item.$el.style.width = `${ width }px` )
       }
     },
 
-    events: {
-      scaleSliderWidth ( fn ) {
-        let _this = this
+    mounted () {
+      const slider = this.$children[ 0 ]
+      const sliderItems = this.$refs.content.$children
 
-        fn( this.$el.clientWidth, this.$children.length - 1 )
-        // For addChildrenLength()
-        this.scaleSliderWidth = function () {
-          fn( _this.$el.clientWidth, _this.$children.length - 1 )
-        }
-      },
-      addChildrenLength () {
-        this.childrenLength++
-        this.childrenArr.push( this.childrenArr.length )
-
-        if ( this.animation === 'normal' ) {
-          this.scaleSliderWidth()
-        }
-
-        this.autoplay()
-      },
-      scaleItemsWidth ( fn ) {
-        fn( this.$el.clientWidth )
+      if ( slider.scaleWidth ) {
+        slider.scaleWidth( this.$el.clientWidth, sliderItems.length )
       }
-    },
-
-    ready () {
+      this.addChildrenLength( sliderItems.length )
+      this.scaleItemsWidth( sliderItems, this.$el.clientWidth )
       // Init autoplay function.
       this.autoplay = this.autoplay()
       this.autoplay()
