@@ -23,10 +23,6 @@ export default {
       this.$el.style.transform = `translate3d( ${ position * -this.width }px, 0, 0 )`
       this.$el.style.webkitTransform = `translate3d( ${ position * -this.width }px, 0, 0 )`
     }
-  },
-
-  ready () {
-    this.$dispatch( 'scaleSliderWidth', this.scaleWidth )
   }
 }
 </script>

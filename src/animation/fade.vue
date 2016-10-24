@@ -73,7 +73,7 @@ export default {
     }
   },
 
-  ready () {
+  mounted () {
     this.init()
   }
 }
