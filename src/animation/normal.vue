@@ -8,13 +8,14 @@
 export default {
   data () {
     return {
-      width: ''
+      width: '',
+      childrenLen: 0
     }
   },
 
   methods: {
-    scaleWidth ( width, childrenLen ) {
-      let totalWidth = width * childrenLen
+    scaleWidth ( width ) {
+      let totalWidth = width * ++this.childrenLen
 
       this.width = width
       this.$el.style.width = `${ totalWidth }px`

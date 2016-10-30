@@ -34,6 +34,7 @@
 
 <script>
   import { normal, fade } from './animation'
+  import { eventHub } from './event'
 
   export default {
     data () {
@@ -160,28 +161,39 @@
         this.autoplay()
       },
 
-      addChildrenLength ( len ) {
-        for ( let i = 0; i < len; i++ ) {
-          this.childrenArr.push( this.childrenArr.length )
-        }
+      addChildrenLength () {
+        this.childrenArr.push( this.childrenArr.length )
       },
-      scaleItemsWidth ( items, width ) {
-        Array.prototype.forEach.call( items, item => item.$el.style.width = `${ width }px` )
+      scaleItemsWidth ( item ) {
+        item.style.width = `${ this.$el.clientWidth }px`
+      },
+
+      newItem ( item ) {
+        const sliderContent = this.$refs.content
+
+        this.addChildrenLength()
+        this.scaleItemsWidth( item )
+
+        if ( sliderContent.scaleWidth ) {
+          sliderContent.scaleWidth( this.$el.clientWidth )
+        }
+
+        this.autoplay()
       }
     },
 
-    mounted () {
-      const slider = this.$children[ 0 ]
-      const sliderItems = this.$refs.content.$children
+    created () {
+      eventHub.$on( 'newItem', this.newItem )
+    },
 
-      if ( slider.scaleWidth ) {
-        slider.scaleWidth( this.$el.clientWidth, sliderItems.length )
-      }
-      this.addChildrenLength( sliderItems.length )
-      this.scaleItemsWidth( sliderItems, this.$el.clientWidth )
+    mounted () {
       // Init autoplay function.
       this.autoplay = this.autoplay()
       this.autoplay()
+    },
+
+    beforeDestory () {
+      eventHub.$off( 'newItem', this.newItem )
     },
 
     components: {
