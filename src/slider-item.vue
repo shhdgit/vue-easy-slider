@@ -5,13 +5,11 @@
 </template>
 
 <script>
-  import { eventHub } from './event'
-
   export default {
     mounted () {
       const sliderContent = this.$parent
 
-      eventHub.$emit( 'newItem', this.$el )
+      sliderContent.$parent.newItem(this.$el)
     }
   }
 </script>

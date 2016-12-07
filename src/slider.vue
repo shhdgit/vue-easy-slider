@@ -34,7 +34,6 @@
 
 <script>
   import { normal, fade } from './animation'
-  import { eventHub } from './event'
 
   export default {
     data () {
@@ -182,18 +181,10 @@
       }
     },
 
-    created () {
-      eventHub.$on( 'newItem', this.newItem )
-    },
-
     mounted () {
       // Init autoplay function.
       this.autoplay = this.autoplay()
       this.autoplay()
-    },
-
-    beforeDestory () {
-      eventHub.$off( 'newItem', this.newItem )
     },
 
     components: {
