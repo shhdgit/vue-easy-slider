@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <div id="slider">
+    <slider animation="normal"
+            :speed="1000">
+      <slider-item :style="{ backgroundColor: '#3f51b5' }"></slider-item>
+      <slider-item :style="{ backgroundColor: '#eee' }"></slider-item>
+      <slider-item :style="{ backgroundColor: '#f44336' }"></slider-item>
+    </slider>
+  </div>
+
+  <script src="http://cdn.css.net/libs/vue/2.0.3/vue.min.js"></script>
+  <script>
+    new Vue( {
+      el: '#slider',
+      components: {
+        'Slider': window[ 'vue-easy-slider' ].Slider,
+        'SliderItem': window[ 'vue-easy-slider' ].SliderItem
+      }
+    } )
+  </script>
+</body>
+</html>
