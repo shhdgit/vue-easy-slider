@@ -39,7 +39,8 @@
     data () {
       return {
         posFlag: 0,
-        childrenArr: []
+        childrenArr: [],
+        timer: null
       }
     },
 
@@ -112,13 +113,13 @@
         }
 
         return function () {
-          if ( !!timer ) {
-            clearInterval( timer )
-            timer = setTimer()
+          if ( !!this.timer ) {
+            clearInterval( this.timer )
+            this.timer = setTimer()
           } else {
             // Config autoplay & slider item large than 2, coz slider is one of items
             if ( _this.auto && content.$children.length > 1 ) {
-              timer = setTimer()
+              this.timer = setTimer()
             }
           }
         }
@@ -185,6 +186,10 @@
       // Init autoplay function.
       this.autoplay = this.autoplay()
       this.autoplay()
+    },
+
+    beforeDestroy () {
+      clearInterval(this.timer)
     },
 
     components: {
