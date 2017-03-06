@@ -6,11 +6,9 @@ vue-easy-slider is a slider component of Vue 1.x（[go 2.x](https://github.com/s
 
 [fiddle](https://jsfiddle.net/su9zv0w9/1/)
 
-## Install
+## Download
 
-```bash
-$ npm install --save vue-easy-slider
-```
+Download components from ./dist
 
 ## Usage
 
