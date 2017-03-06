@@ -1,6 +1,6 @@
 ## Intro
 
-vue-easy-slider is a slider component of Vue 2.x（[go 1.x](https://github.com/shhdgit/vue-easy-slider/tree/master)）.
+vue-easy-slider is a slider component of Vue 2.x
 
 ## Demo
 
