@@ -60,7 +60,7 @@ export default {
     init () {
       let items = this.items = this.$el.children,
           length = items.length
-
+      if (!length) return
       Array.prototype.forEach.call( items, ( item, index ) => {
         item.style.position = 'absolute'
         item.style.left = 0
@@ -73,7 +73,7 @@ export default {
     }
   },
 
-  ready () {
+  mounted () {
     this.init()
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "vue-easy-slider",
-  "version": "1.2.3",
+  "version": "1.4.1",
   "description": "vue-easy-slider is a slider component of Vue.js.",
   "keywords": [
     "vue",
@@ -17,6 +17,7 @@
   "licenses": "MIT",
   "main": "./dist/index.js",
   "scripts": {
+    "dev": "webpack-dev-server --config ./webpack.config.dev.js --hot --inline",
     "build": "rm -rf ./dist && webpack --config ./webpack.config.js"
   },
   "devDependencies": {
@@ -27,13 +28,15 @@
     "babel-preset-stage-2": "^6.11.0",
     "babel-runtime": "^6.9.2",
     "css-loader": "^0.23.1",
+    "html-webpack-plugin": "^2.24.0",
     "style-loader": "^0.13.1",
+    "vue": "^2.2.1",
     "vue-html-loader": "^1.2.3",
-    "vue-loader": "^8.5.3",
-    "vue-style-loader": "^1.0.0",
-    "webpack": "^1.13.1"
-  },
-  "dependencies": {
-    "vue": "^1.0.26"
+    "vue-loader": "^11.1.4",
+    "vue-style-loader": "^2.0.3",
+    "vue-template-compiler": "^2.2.1",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.16.2",
+    "webpack-merge": "^0.15.0"
   }
 }

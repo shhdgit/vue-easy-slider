@@ -6,15 +6,9 @@
 
 <script>
   export default {
-    methods: {
-      scaleItemWidth ( width ) {
-        this.$el.style.width = `${ width }px`
-      }
-    },
-
-    ready () {
-      this.$dispatch( 'scaleItemsWidth', this.scaleItemWidth )
-      this.$dispatch( 'addChildrenLength' )
+    mounted () {
+      const sliderContent = this.$parent
+      sliderContent.$parent.newItem(this.$el)
     }
   }
 </script>

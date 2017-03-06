@@ -1,6 +1,5 @@
 .idea/
 node_modules/
-demo/
 
 .npmignore
 .DS_Store
