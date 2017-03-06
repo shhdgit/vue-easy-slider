@@ -6,7 +6,7 @@
 </head>
 <body>
   <div id="slider">
-    <slider animation="normal"
+    <slider animation="fade"
             :speed="1000">
       <slider-item v-for="item in list">
         <img :src="item.src">
@@ -14,7 +14,8 @@
     </slider>
   </div>
 
-  <script src="http://cdn.css.net/libs/vue/2.1.6/vue.min.js"></script>
+  <script src="https://cdn.css.net/libs/vue/2.1.6/vue.min.js"></script>
+  <script type="text/javascript" src="https://cdn.rawgit.com/shhdgit/vue-easy-slider/2.0/dist/index.js"></script>
   <script>
     new Vue( {
       el: '#slider',

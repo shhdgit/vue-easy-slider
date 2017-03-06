@@ -4,7 +4,8 @@ vue-easy-slider is a slider component of Vue 2.x（[go 1.x](https://github.com/s
 
 ## Demo
 
-[fiddle](https://jsfiddle.net/su9zv0w9/1/)
+[simple](https://jsfiddle.net/su9zv0w9/1/)
+[dynamic](https://jsfiddle.net/4nwvy4en/1/)
 
 ## Install
 

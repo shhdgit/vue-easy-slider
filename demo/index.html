@@ -6,43 +6,28 @@
 </head>
 <body>
   <div id="slider">
-    <slider animation="fade"
+    <slider animation="normal"
             :speed="1000">
-      <slider-item v-for="item in list">
-        <img :src="item.src">
-      </slider-item>
+      <slider-item v-for="item in list" :style="{ backgroundColor: item.backgroundColor }"></slider-item>
     </slider>
   </div>
 
-  <script src="http://cdn.css.net/libs/vue/2.1.6/vue.min.js"></script>
+  <script src="https://cdn.css.net/libs/vue/2.1.6/vue.min.js"></script>
   <script>
     new Vue( {
       el: '#slider',
       data () {
         return {
-          list: []
+          list: [
+            { backgroundColor: '#3f51b5' },
+            { backgroundColor: '#eee' },
+            { backgroundColor: '#f44336' },
+          ]
         }
       },
       components: {
         'Slider': window[ 'vue-easy-slider' ].Slider,
         'SliderItem': window[ 'vue-easy-slider' ].SliderItem
-      },
-      mounted () {
-        setTimeout(() => {
-          this.list = [{
-              "src": "https://drscdn.500px.org/photo/118785927/m%3D2048/51dda482036d6d91f2902406c3e8f41f",
-              "description": "Lorem"
-            },
-            {
-              "src": "https://drscdn.500px.org/photo/118785927/m%3D2048/51dda482036d6d91f2902406c3e8f41f",
-              "description": "Lorem ipsum"
-            },
-            {
-              "src": "https://drscdn.500px.org/photo/118785927/m%3D2048/51dda482036d6d91f2902406c3e8f41f",
-              "description": ""
-            }
-          ]
-        }, 1000)
       }
     } )
   </script>
