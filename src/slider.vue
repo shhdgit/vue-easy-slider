@@ -177,6 +177,7 @@
         if ( sliderContent.scaleWidth ) {
           sliderContent.scaleWidth( this.$el.clientWidth )
         }
+        if (sliderContent.init) sliderContent.init()
 
         this.autoplay()
       }

@@ -8,7 +8,6 @@
   export default {
     mounted () {
       const sliderContent = this.$parent
-
       sliderContent.$parent.newItem(this.$el)
     }
   }
