@@ -8,9 +8,11 @@ vue-easy-slider is a slider component of Vue 2.x
 
 [dynamic](https://jsfiddle.net/4nwvy4en/1/)
 
-## Download
+## Install
 
-Download components from ./dist
+```bash
+$ npm install --save vue-easy-slider
+```
 
 ## Usage
 
