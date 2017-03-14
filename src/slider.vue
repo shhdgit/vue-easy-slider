@@ -1,282 +1,230 @@
 <template>
-  <div class="slider"
-       :style="{ width: width, height: height }">
-    <component :is="animation"
-               :style="{ transition: 'all ' + thisSpeed + 's' }"
-               :speed="thisSpeed"
-               class="slider-content"
-               ref="content">
+<div
+  :style="{ width: width, height: height }"
+  class="slider">
+  <transition-group
+    @before-enter="beforeEnter"
+    @enter="enter"
+    @leave="leave"
+    :css="false"
+    tag="p"
+    class="test">
+    <span v-for="item in children" :key="item">
       <slot></slot>
-    </component>
-
-    <div class="slider-btn slider-left-btn"
-         @click.stop="preview"
-         v-if="controlBtn">
-      <i class="slider-icon slider-icon-left"></i>
-    </div>
-    <div class="slider-btn slider-right-btn"
-         @click.stop="next"
-         v-if="controlBtn">
-      <i class="slider-icon slider-icon-right"></i>
-    </div>
-
-    <div class="slider-indicators"
-         v-if="indicators !== false"
-         :class="indicatorClass"
-         @click.stop>
-      <i class="slider-indicator-icon"
-         v-for="( item, index ) in childrenArr"
-         :class="{ 'slider-indicator-active': posFlag === index }"
-         @click="jump2( index )"></i>
-    </div>
+    </span>
+  </transition-group>
+  <div style="display: none;">
   </div>
+  <button @click="next">test</button>
+</div>
 </template>
 
 <script>
-  import { normal, fade } from './animation'
+import Animator from './animator'
 
-  export default {
-    data () {
-      return {
-        posFlag: 0,
-        childrenArr: [],
-        timer: null
-      }
+const animation = {
+  normal_std: {
+    beforeEnter (vm, el) {
+      const dom = vm.$el
+      const styles = getComputedStyle(dom)
+      const width = styles.width
+      el.style.transform = `translateX(${ width })`
     },
-
-    props: {
-      width: {
-        type: String,
-        default: 'auto'
-      },
-      height: {
-        type: String,
-        default: '300px'
-      },
-      interval: {
-        type: Number,
-        default: 3000
-      },
-      speed: {
-        type: Number,
-        default: 500
-      },
-      auto: {
-        type: Boolean,
-        default: true
-      },
-      indicators: {
-        default: 'center'
-      },
-      controlBtn: {
-        type: Boolean,
-        default: true
-      },
-      animation: {
-        type: String,
-        default: 'normal'
-      }
+    async enter (vm, el) {
+      const dom = vm.$el
+      const styles = getComputedStyle(dom)
+      const width = parseInt(styles.width)
+      const animator = new Animator(vm.thisSpeed, function (p) {
+        el.style.transform = `translateX(${ width * (1 - p) }px)`
+      })
+      await animator.animate()
     },
-
-    computed: {
-      thisSpeed () {
-        let speed = this.speed / 1000
-
-        return speed.toFixed( 2 )
-      },
-      indicatorClass () {
-        if ( this.indicators ) {
-          return `slider-${ this.indicators }`
-        }
-      }
+    async leave (vm, el) {
+      const dom = vm.$el
+      const styles = getComputedStyle(dom)
+      const width = parseInt(styles.width)
+      const animator = new Animator(vm.thisSpeed, function (p) {
+        el.style.transform = `translateX(${ -width * p }px)`
+      })
+      await animator.animate()
     },
-
-    methods: {
-      autoplay () {
-        let timer
-
-        // Get animation's vm
-        let content = this.$refs.content,
-            _this = this,
-            originPos = this.posFlag
-
-        function setTimer () {
-          return setInterval( () => {
-            if ( _this.posFlag < content.$children.length - 1 ) {
-              _this.posFlag++
-            } else {
-              _this.posFlag = 0
-            }
-
-            content.animation( originPos, _this.posFlag )
-          }, _this.interval )
-        }
-
-        return function () {
-          if ( !!this.timer ) {
-            clearInterval( this.timer )
-            this.timer = setTimer()
-          } else {
-            // Config autoplay & slider item large than 2, coz slider is one of items
-            if ( _this.auto && content.$children.length > 1 ) {
-              this.timer = setTimer()
-            }
-          }
-        }
-
-      },
-      next () {
-        let content = this.$refs.content,
-            originPos = this.posFlag
-
-        if ( this.posFlag < content.$children.length - 1 ) {
-          ++this.posFlag
-        } else {
-          this.posFlag = 0
-        }
-
-        content.animation( originPos, this.posFlag )
-        // Clean the Timer, reset autoplay's interval time.
-        this.autoplay()
-      },
-      preview () {
-        let content = this.$refs.content,
-            originPos = this.posFlag
-
-        if ( this.posFlag > 0 ) {
-          --this.posFlag
-        } else {
-          this.posFlag = content.$children.length - 1
-        }
-
-        content.animation( originPos, this.posFlag, 'preview' )
-        this.autoplay()
-      },
-      jump2 ( index ) {
-        let content = this.$refs.content,
-            originPos = this.posFlag
-
-        content.animation( originPos, index, 'jump' )
-        this.posFlag = index
-        this.autoplay()
-      },
-
-      addChildrenLength () {
-        this.childrenArr.push( this.childrenArr.length )
-      },
-      scaleItemsWidth ( item ) {
-        item.style.width = `${ this.$el.clientWidth }px`
-      },
-
-      newItem ( item ) {
-        const sliderContent = this.$refs.content
-
-        this.addChildrenLength()
-        this.scaleItemsWidth( item )
-
-        if ( sliderContent.scaleWidth ) {
-          sliderContent.scaleWidth( this.$el.clientWidth )
-        }
-        if (sliderContent.init) sliderContent.init()
-
-        this.autoplay()
-      }
+  },
+  fade_std: {
+    beforeEnter (vm, el) {
+      el.style.opacity = 0
     },
+    async enter (vm, el) {
+      const animator = new Animator(vm.thisSpeed, function (p) {
+        el.style.opacity = p
+      })
+      await animator.animate()
+    },
+    async leave (vm, el) {
+      const animator = new Animator(vm.thisSpeed, function (p) {
+        el.style.opacity = 1 - p
+      })
+      await animator.animate()
+    },
+  },
+}
 
-    mounted () {
-      // Init autoplay function.
-      this.autoplay = this.autoplay()
+export default {
+  data () {
+    return {
+      i: 0,
+      timerId: 0,
+      animationAddtion: 'std',
+      minSpeed: 300,
+      children: [],
+    }
+  },
+
+  props: {
+    width: {
+      type: String,
+      default: 'auto'
+    },
+    height: {
+      type: String,
+      default: '300px'
+    },
+    interval: {
+      type: Number,
+      default: 3000
+    },
+    speed: {
+      type: Number,
+      default: 500
+    },
+    auto: {
+      type: Boolean,
+      default: true
+    },
+    indicators: {
+      default: 'center'
+    },
+    controlBtn: {
+      type: Boolean,
+      default: true
+    },
+    animation: {
+      type: String,
+      default: 'normal'
+    }
+  },
+
+  computed: {
+    thisAnimation: {
+      get () {
+        return `${ this.animation }_${ this.animationAddtion }`
+      },
+      set (val) {
+        this.animationAddtion = val
+      },
+    },
+    thisSpeed () {
+      const speed = this.speed
+      const minSpeed = this.minSpeed
+      return speed > minSpeed ? speed : minSpeed
+    },
+    thisInterval () {
+      const interval = this.interval
+      const speed = this.thisSpeed
+      return interval > speed ? interval : speed
+    },
+  },
+
+  methods: {
+    init () {
+      if (this.auto) this.autoplay()
+    },
+    destroy () {
+      if (this.auto) this.stopAutoplay()
+    },
+    newItem () {
+    },
+    beforeEnter (el) {
+      animation[this.thisAnimation].beforeEnter(this, el)
+    },
+    async enter (el, done) {
+      await animation[this.thisAnimation].enter(this, el)
+      done()
+    },
+    async leave (el, done) {
+      await animation[this.thisAnimation].leave(this, el)
+      done()
+    },
+    autoplay () {
+      const interval = this.thisInterval
+      const self = this
+      function step () {
+        self.thisAnimation = 'std'
+        self.change((self.i + 1) % 10)
+        self.timerId = setTimeout(step, interval)
+      }
+      this.timerId = setTimeout(step, interval)
+    },
+    stopAutoplay () {
+      clearTimeout(this.timerId)
+    },
+    change (i) {
+      // this.i = i
+      const h = this.$createElement
+    },
+    next () {
+      this.stopAutoplay()
+      this.change((this.i + 1) % 10)
       this.autoplay()
     },
-
-    beforeDestroy () {
-      clearInterval(this.timer)
+    prev () {
+      this.stopAutoplay()
+      this.change((this.i - 1) % 10)
+      this.autoplay()
     },
+  },
 
-    components: {
-      normal,
-      fade
-    }
+  beforeMount () {
+  },
+
+  mounted () {
+    console.log(this.$slots.default[0].child)
+    this.children.push(this.$slots.default[0].child)
+    // const slideItem = this.$slots.default[0].child
+    // slideItem.$set(slideItem.$data.test, 'id', 0)
+    // const slideItem2 = this.$slots.default[1].child
+    // slideItem2.$set(slideItem2.$data.test, 'id', 1)
+    // console.log(slideItem.$data)
+    // this.init()
+  },
+
+  beforeDestroy () {
+    this.destroy()
+  },
+
+  activated () {
+    this.init()
+  },
+
+  deactivated () {
+    this.destroy()
+  },
+
+  components: {
   }
+}
 </script>
 
-<style scoped>
-  .slider {
-    position: relative;
-
-    overflow: hidden;
-  }
-  .slider-content {
-    position: relative;
-
+<style lang="less" scoped>
+.slider {
+  overflow: hidden;
+}
+.test {
+  width: 100%;
+  height: 100%;
+  span {
+    display: inline-block;
+    width: 100%;
     height: 100%;
   }
-  .slider-indicators {
-    position: absolute;
-    bottom: 0;
-    z-index: 99;
-
-    padding: 1rem;
-  }
-  .slider-center {
-    left: 50%;
-
-    transform: translateX( -50% );
-  }
-  .slider-left {
-    left: 0;
-  }
-  .slider-right {
-    right: 0;
-  }
-  .slider-indicator-icon {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    margin: 0 .1rem;
-
-    cursor: pointer;
-    border-radius: 50%;
-    background-color: rgba( 0, 0, 0, .2 );
-  }
-  .slider-indicator-active {
-    background-color: rgba( 255, 255, 255, .2 );
-  }
-  .slider-btn {
-    position: absolute;
-    top: 50%;
-    z-index: 99;
-
-    transform: translateY( -50% );
-    cursor: pointer;
-    background-color: #000;
-    transition: opacity .3s;
-    opacity: .3;
-  }
-  .slider-btn:hover {
-    opacity: .5;
-  }
-  .slider-left-btn {
-    left: 0;
-
-    padding: 1rem .5rem .75rem .8rem;
-  }
-  .slider-right-btn {
-    right: 0;
-
-    padding: 1rem .8rem .75rem .5rem;
-  }
-  .slider-icon {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border-left: 2px solid #fff;
-    border-bottom: 2px solid #fff;
-  }
-  .slider-icon-left {
-    transform: rotate( 45deg );
-  }
-  .slider-icon-right {
-    transform: rotate( -135deg );
-  }
+}
 </style>
