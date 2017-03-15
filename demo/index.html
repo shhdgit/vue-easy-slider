@@ -6,9 +6,10 @@
 </head>
 <body>
   <div id="slider">
-    <slider animation="normal"
-            :speed="1000">
-      <slider-item v-for="(item, index) in list" :key="index" :style="{ backgroundColor: item.backgroundColor }"></slider-item>
+    <slider
+      :list="[{ title: '', img: '', src: '' }]"
+      :speed="1000"
+      animation="normal">
     </slider>
   </div>
 
