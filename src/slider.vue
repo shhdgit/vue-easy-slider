@@ -175,9 +175,6 @@ export default {
   deactivated () {
     this.timer && clearTimeout(this.timer)
   },
-
-  components: {
-  }
 }
 </script>
 
