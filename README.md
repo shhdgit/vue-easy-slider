@@ -4,41 +4,47 @@ vue-easy-slider is a slider component of Vue 2.x
 
 ## Demo
 
-[simple](https://jsfiddle.net/su9zv0w9/1/)
-
-[dynamic](https://jsfiddle.net/4nwvy4en/1/)
+[demo](https://jsfiddle.net/su9zv0w9/1/)
 
 ## Install
 
 ```bash
-$ npm install --save vue-easy-slider
+$ npm i -S vue-easy-slider
 ```
 
 ## Usage
 
 Work on a Vue instance:
 
+```HTML
+<slider animation="fade">
+  <slider-item v-for="(i, index) in list" :key="index">
+    <div :style="i">
+      <p style="line-height: 280px; font-size: 5rem; text-align: center;">Page{{ index + 1 }}</p>
+    </div>
+  </slider-item>
+</slider>
+```
+
 ```JavaScript
 import { Slider, SliderItem } from 'vue-easy-slider'
 
 new Vue( {
   el: 'body',
+  data () {
+    return {
+      list: [
+        { backgroundColor: '#3f51b5', width: '100%', height: '100%' },
+        { backgroundColor: '#eee', width: '100%', height: '100%' },
+        { backgroundColor: '#f44336', width: '100%', height: '100%' },
+      ],
+    }
+  },
   components: {
     Slider,
     SliderItem
   }
 } )
-```
-
-```HTML
-<slider width="800px"
-        animation="fade"
-        :interval="1000"
-        :speed="1000">
-  <slider-item :style="{ backgroundColor: '#3f51b5' }"></slider-item>
-  <slider-item :style="{ backgroundColor: '#eee' }"></slider-item>
-  <slider-item :style="{ backgroundColor: '#f44336' }"></slider-item>
-</slider>
 ```
 
 ## Props
@@ -102,6 +108,33 @@ Slider：
       <td>String - { normal, fade }</td>
       <td>normal</td>
       <td>Change animation</td>
+    </tr>
+    <tr>
+      <td>init-index</td>
+      <td>Number</td>
+      <td>0</td>
+      <td>Index of the initially active slide</td>
+    </tr>
+  </tbody>
+</table>
+
+Slider-item：
+
+<table>
+  <thead>
+  <tr>
+    <th>name</th>
+    <th>type</th>
+    <th>default</th>
+    <th>description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>on-click</td>
+      <td>Function</td>
+      <td>function () {}</td>
+      <td>Click event</td>
     </tr>
   </tbody>
 </table>

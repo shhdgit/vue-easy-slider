@@ -3,29 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
+  <style type="text/css">
+    p {
+      margin: 0;
+    }
+  </style>
 </head>
 <body>
   <div id="slider">
-    <slider
-      :list="[{ title: '', img: '', src: '' }]"
-      :speed="1000"
-      animation="normal">
+    <slider animation="fade">
+      <p style="line-height: 280px; font-size: 5rem; text-align: center;" v-if="!list.length">Loading...</p>
+      <slider-item v-for="(i, index) in list" :key="index" :on-click="test">
+        <div :style="i">
+          <p style="line-height: 280px; font-size: 5rem; text-align: center;">Page{{ index + 1 }}</p>
+        </div>
+      </slider-item>
     </slider>
   </div>
 
-  <script src="https://cdn.css.net/libs/vue/2.1.6/vue.min.js"></script>
+  <script src="https://unpkg.com/vue@2.2.4/dist/vue.min.js"></script>
+  <script type="text/javascript" src="../dist/index.js"></script>
   <script>
     new Vue( {
       el: '#slider',
       data () {
         return {
-          list: [
-            { backgroundColor: '#3f51b5' },
-            { backgroundColor: '#eee' },
-            { backgroundColor: '#f44336' },
-          ]
+          list: [],
         }
       },
+
+      methods: {
+        test () {console.log(1)}
+      },
+
+      mounted () {
+        setTimeout(() => {
+          this.list = [
+            { backgroundColor: '#3f51b5', width: '100%', height: '100%' },
+            { backgroundColor: '#eee', width: '100%', height: '100%' },
+            { backgroundColor: '#f44336', width: '100%', height: '100%' },
+          ]
+        }, 1000)
+      },
+
       components: {
         'Slider': window[ 'vue-easy-slider' ].Slider,
         'SliderItem': window[ 'vue-easy-slider' ].SliderItem
