@@ -155,9 +155,6 @@ export default {
     },
   },
 
-  watch: {
-  },
-
   created () {
     this.handleItemChange = throttle(this.updateItems, 100)
     this.jump = debounce(this.jump, this.speed + 100)
