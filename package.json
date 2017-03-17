@@ -16,6 +16,7 @@
   },
   "licenses": "MIT",
   "main": "./dist/index.js",
+  "module": "./src/index.js",
   "scripts": {
     "dev": "webpack-dev-server --config ./webpack.config.dev.js --hot --inline",
     "build": "rm -rf ./dist && webpack --config ./webpack.config.js"
