@@ -112,7 +112,7 @@ export default {
       if (prevItem) prevItem.$el.style.zIndex = 98
     },
     autoplay () {
-      if (!this.auto) return
+      if (!this.auto || this.childrenLength < 2) return
       const self = this
       function setTimer () {
         return setInterval(() => {
@@ -137,16 +137,19 @@ export default {
       }
     },
     prev () {
+      if (this.childrenLength < 2) return
       const nextIndex = this.nowItemIndex - 1 === -1 ? this.childrenLength - 1 : this.nowItemIndex - 1
       this.jump(nextIndex)
       this.autoplay()
     },
     next () {
+      if (this.childrenLength < 2) return
       const nextIndex = (this.nowItemIndex + 1) % this.childrenLength
       this.jump(nextIndex)
       this.autoplay()
     },
     indicatorHandle (i) {
+      if (this.childrenLength < 2) return
       this.jump(i)
       this.autoplay()
     },
