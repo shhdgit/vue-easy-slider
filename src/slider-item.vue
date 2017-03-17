@@ -23,27 +23,23 @@ const animation = {
       const width = parseFloat(widthText)
       el.style.transform = 'translateX(' + (vm.direction ? widthText : `-${ widthText }`) + ')'
     },
-    async enter (vm, el) {
+    enter (vm, el, callback) {
       const styles = getComputedStyle(el)
       const widthText = styles.width
       const width = vm.direction ? parseFloat(widthText) : -parseFloat(widthText)
       const animation = new Animator(vm.speed, function (p) {
         el.style.transform = `translateX(${ width - width * p }px)`
       })
-      await animation.animate()
-
-      return Promise.resolve()
+      animation.animate(() => callback())
     },
-    async leave (vm, el) {
+    leave (vm, el) {
       const styles = getComputedStyle(el)
       const widthText = styles.width
       const width = vm.direction ? -parseFloat(widthText) : parseFloat(widthText)
       const animation = new Animator(vm.speed, function (p) {
         el.style.transform = `translateX(${ width * p }px)`
       })
-      await animation.animate()
-
-      return Promise.resolve()
+      animation.animate(() => callback())
     },
   },
   fade: {
@@ -51,25 +47,21 @@ const animation = {
       el.style.opacity = 0
       el.style.transform = vm.direction ? 'translateX(10px)' : 'translateX(-10px)'
     },
-    async enter (vm, el) {
+    enter (vm, el, callback) {
       const translate = vm.direction ? 10 : -10
       const animation = new Animator(vm.speed, function (p) {
         el.style.opacity = p
         el.style.transform = `translateX(${ translate - translate * p }px)`
       })
-      await animation.animate()
-
-      return Promise.resolve()
+      animation.animate(() => callback())
     },
-    async leave (vm, el) {
+    leave (vm, el, callback) {
       const translate = vm.direction ? -10 : 10
       const animation = new Animator(vm.speed, function (p) {
         el.style.opacity = 1 - p
         el.style.transform = `translateX(${ translate * p }px)`
       })
-      await animation.animate()
-
-      return Promise.resolve()
+      animation.animate(() => callback())
     },
   },
 }
@@ -102,14 +94,14 @@ export default {
     beforeEnter (el) {
       animation[this.animation].beforeEnter(this, el)
     },
-    async enter (el, done) {
-      await animation[this.animation].enter(this, el)
-      done()
+    enter (el, done) {
+      animation[this.animation].enter(this, el, () => done())
     },
-    async leave (el, done) {
-      await animation[this.animation].leave(this, el)
-      done()
-      this.show = false
+    leave (el, done) {
+      animation[this.animation].leave(this, el, () => {
+        done()
+        this.show = false
+      })
     },
     showHandle (direction) {
       this.direction = direction
