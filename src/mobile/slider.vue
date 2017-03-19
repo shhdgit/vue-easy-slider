@@ -16,23 +16,12 @@
       v-for="i in childrenLength"
       class="slider-indicator-icon"></span>
   </div>
-  <button
-    @click.stop="prev"
-    v-if="controlBtn"
-    class="btn btn-left">
-    <i class="slider-icon slider-icon-left"></i>
-  </button>
-  <button
-    @click.stop="next"
-    v-if="controlBtn"
-    class="btn btn-right">
-    <i class="slider-icon slider-icon-right"></i>
-  </button>
 </div>
 </template>
 
 <script>
-import { throttle, debounce } from './utils'
+import AlloyFinger from 'alloyfinger'
+import { throttle, debounce } from '../utils'
 
 export default {
   data () {
@@ -66,10 +55,6 @@ export default {
     },
     indicators: {
       default: 'center'
-    },
-    controlBtn: {
-      type: Boolean,
-      default: true
     },
     animation: {
       type: String,
@@ -178,60 +163,11 @@ export default {
 .slider {
   position: relative;
   overflow: hidden;
-
-  &:hover {
-    .btn-left {
-      background: linear-gradient(90deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
-    }
-    .btn-right {
-      background: linear-gradient(-90deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
-    }
-  }
 }
 .items {
   position: relative;
   height: 100%;
   width: 100%;
-}
-.btn {
-  position: absolute;
-  top: 0;
-  z-index: 999;
-
-  height: 100%;
-  width: 50px;
-  border: none;
-
-  background: rgba(0, 0, 0, .1);
-  outline: none;
-  transition: background .3s;
-  cursor: pointer;
-}
-.btn-left {
-  left: 0;
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
-}
-.btn-right {
-  right: 0;
-  background: linear-gradient(-90deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
-}
-.slider-icon {
-  display: inline-block;
-  width: 15px;
-  height: 15px;
-  border-left: 2px solid rgba(255, 255, 255, .6);
-  border-bottom: 2px solid rgba(255, 255, 255, .6);
-
-  transition: border .2s;
-}
-.slider-icon-left {
-  transform: rotate( 45deg );
-}
-.slider-icon-right {
-  transform: rotate( -135deg );
-}
-.btn:hover .slider-icon {
-  border-color: rgba(255, 255, 255, 1);
 }
 .indicators {
   position: absolute;

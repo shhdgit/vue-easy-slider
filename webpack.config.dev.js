@@ -6,7 +6,7 @@ const PROJECT_ROOT = require( 'path' ).resolve( __dirname );
 module.exports = merge( BASE_CONFIG, {
   output: {
     path: './',
-    filename: 'index.js',
+    filename: '[name].js',
     publicPath: ''
   },
   devtool: 'eval-source-map',

@@ -1,10 +1,13 @@
 const webpack = require( 'webpack' )
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    index: './src/index.js',
+    mobile: './src/mobile/index.js'
+  },
   output: {
     path: './dist/',
-    filename: 'index.js',
+    filename: '[name].js',
     library: 'vue-easy-slider',
     libraryTarget: 'umd',
     umdNamedDefine: true
