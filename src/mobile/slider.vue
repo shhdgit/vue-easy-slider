@@ -2,7 +2,9 @@
 <div
   :style="{ width: width, height: height }"
   class="slider">
-  <div class="items">
+  <div
+    ref="container"
+    class="items">
     <slot></slot>
   </div>
   <div
@@ -29,6 +31,7 @@ export default {
       children: [],
       nowItemIndex: 0,
       timer: 0,
+      af: null,
     }
   },
 
@@ -145,16 +148,35 @@ export default {
     this.handleItemChange()
   },
 
+  mounted () {
+    const self = this
+    const container = this.$refs.container
+    const af = this.af = new AlloyFinger(container, {
+      swipe (evt) {
+        evt.direction === 'Left' ? self.next() : self.prev()
+      },
+    })
+  },
+
   activated () {
+    const self = this
+    const container = this.$refs.container
+    const af = this.af = new AlloyFinger(container, {
+      swipe (evt) {
+        evt.direction === 'Left' ? self.next() : self.prev()
+      },
+    })
     this.handleItemChange()
   },
 
   beforeDestroy () {
     this.timer && clearTimeout(this.timer)
+    this.af.destroy()
   },
 
   deactivated () {
     this.timer && clearTimeout(this.timer)
+    this.af.destroy()
   },
 }
 </script>
@@ -179,10 +201,10 @@ export default {
   transform: translateX(-50%);
 }
 .indi-left {
-  left: 6%;
+  left: 3%;
 }
 .indi-right {
-  right: 6%;
+  right: 3%;
 }
 .slider-indicator-icon {
   display: inline-block;
