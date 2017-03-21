@@ -118,23 +118,52 @@ Slider：
   </tbody>
 </table>
 
-Slider-item：
+## Events
+
+Slider：
 
 <table>
   <thead>
   <tr>
     <th>name</th>
-    <th>type</th>
-    <th>default</th>
     <th>description</th>
+    <th>$event</th>
   </tr>
   </thead>
   <tbody>
     <tr>
-      <td>on-click</td>
-      <td>Function</td>
-      <td>function () {}</td>
+      <td>changeSlide</td>
+      <td>Fires when the slide change</td>
+      <td>$event.index</td>
+    </tr>
+    <tr>
+      <td>next</td>
+      <td>Fires when the button for the next slide was pressed</td>
+      <td>$event.original, $event.next</td>
+    </tr>
+    <tr>
+      <td>previous</td>
+      <td>Fires when the button for the previous slide was pressed</td>
+      <td>$event.original, $event.next</td>
+    </tr>
+  </tbody>
+</table>
+
+SliderItem:
+
+<table>
+  <thead>
+  <tr>
+    <th>name</th>
+    <th>description</th>
+    <th>$event</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>onClick</td>
       <td>Click event</td>
+      <td></td>
     </tr>
   </tbody>
 </table>
@@ -170,38 +199,6 @@ usage:
   </slider-item>
 </slider>
 ```
-
-## Events
-
-Slider：
-
-<table>
-  <thead>
-  <tr>
-    <th>name</th>
-    <th>description</th>
-    <th>$event</th>
-  </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>changeSlide</td>
-      <td>Fires when the slide change</td>
-      <td>$event.index</td>
-    </tr>
-    <tr>
-      <td>next</td>
-      <td>Fires when the button for the next slide was pressed</td>
-      <td>$event.original, $event.next</td>
-    </tr>
-    <tr>
-      <td>previous</td>
-      <td>Fires when the button for the previous slide was pressed</td>
-      <td>$event.original, $event.next</td>
-    </tr>
-  </tbody>
-</table>
-
 
 # License
 MIT
