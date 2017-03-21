@@ -171,5 +171,35 @@ usage:
 </slider>
 ```
 
+## Events
+
+Slider：
+
+<table>
+  <thead>
+  <tr>
+    <th>name</th>
+    <th>type</th>
+    <th>default</th>
+    <th>description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>changeSlide</td>
+      <td>Fires when the slide change</td>
+    </tr>
+    <tr>
+      <td>next</td>
+      <td>Fires when the button for the next slide was pressed</td>
+    </tr>
+    <tr>
+      <td>changeSlide</td>
+      <td>Fires when the button for the previous slide was pressed</td>
+    </tr>
+  </tbody>
+</table>
+
+
 # License
 MIT
