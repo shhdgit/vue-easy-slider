@@ -136,14 +136,14 @@ export default {
     prev () {
       if (this.childrenLength < 2) return
       const nextIndex = this.nowItemIndex - 1 === -1 ? this.childrenLength - 1 : this.nowItemIndex - 1
-      this.$emit('previous', {orginal: this.nowItemIndex, next: nextIndex});
+      this.$emit('previous', {original: this.nowItemIndex, next: nextIndex});
       this.jump(nextIndex)
       this.autoplay()
     },
     next () {
       if (this.childrenLength < 2) return
       const nextIndex = (this.nowItemIndex + 1) % this.childrenLength
-      this.$emit('next', {orginal: this.nowItemIndex, next: nextIndex});
+      this.$emit('next', {original: this.nowItemIndex, next: nextIndex});
       this.jump(nextIndex)
       this.autoplay()
     },
