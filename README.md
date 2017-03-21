@@ -180,20 +180,24 @@ Slider：
   <tr>
     <th>name</th>
     <th>description</th>
+    <th>$event</th>
   </tr>
   </thead>
   <tbody>
     <tr>
       <td>changeSlide</td>
       <td>Fires when the slide change</td>
+      <td>$event.index</td>
     </tr>
     <tr>
       <td>next</td>
       <td>Fires when the button for the next slide was pressed</td>
+      <td>$event.original, $event.next</td>
     </tr>
     <tr>
-      <td>changeSlide</td>
+      <td>previous</td>
       <td>Fires when the button for the previous slide was pressed</td>
+      <td>$event.original, $event.next</td>
     </tr>
   </tbody>
 </table>
