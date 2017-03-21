@@ -130,20 +130,20 @@ export default {
         nowItem.hideHandle(direction)
         nextItem.showHandle(direction)
         this.nowItemIndex = i
-        this.$emit('changeSlide');
+        this.$emit('changeSlide', {index: i});
       }
     },
     prev () {
       if (this.childrenLength < 2) return
       const nextIndex = this.nowItemIndex - 1 === -1 ? this.childrenLength - 1 : this.nowItemIndex - 1
-      this.$emit('previous');
+      this.$emit('previous', {orginal: this.nowItemIndex, next: nextIndex});
       this.jump(nextIndex)
       this.autoplay()
     },
     next () {
       if (this.childrenLength < 2) return
       const nextIndex = (this.nowItemIndex + 1) % this.childrenLength
-      this.$emit('next');
+      this.$emit('next', {orginal: this.nowItemIndex, next: nextIndex});
       this.jump(nextIndex)
       this.autoplay()
     },
