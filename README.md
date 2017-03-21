@@ -179,8 +179,6 @@ Slider：
   <thead>
   <tr>
     <th>name</th>
-    <th>type</th>
-    <th>default</th>
     <th>description</th>
   </tr>
   </thead>
