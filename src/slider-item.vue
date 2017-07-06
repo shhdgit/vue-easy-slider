@@ -1,41 +1,43 @@
 <template>
-<div class="slider-item" v-if="show" @click="onClick">
-  <transition
-    :css="false"
-    @beforeEnter="beforeEnter"
-    @enter="enter"
-    @leave="leave">
-    <div class="wrap" v-if="animate">
-      <slot></slot>
-    </div>
-  </transition>
-</div>
+  <div class="slider-item" v-if="show" @click="onClick">
+    <transition
+      :css="false"
+      @beforeEnter="beforeEnter"
+      @enter="enter"
+      @leave="leave">
+      <div class="wrap" v-if="animate">
+        <slot></slot>
+      </div>
+    </transition>
+  </div>
 </template>
 
 <script>
 import Animator from './animator'
 
+const parseWidth = function(el) {
+  const styles = getComputedStyle(el)
+  const widthText = styles.width
+  return parseFloat(widthText)
+}
+
+const negateIf = (val, condition) => condition ? -val : val;
+
 const animation = {
   normal: {
     beforeEnter (vm, el) {
-      const styles = getComputedStyle(el)
-      const widthText = styles.width
-      const width = parseFloat(widthText)
-      el.style.transform = 'translateX(' + (vm.direction ? widthText : `-${ widthText }`) + ')'
+      let width = negateIf(parseWidth(el), !vm.direction)
+      el.style.transform = `translateX(${width}px)`
     },
     enter (vm, el, callback) {
-      const styles = getComputedStyle(el)
-      const widthText = styles.width
-      const width = vm.direction ? parseFloat(widthText) : -parseFloat(widthText)
+      const width = negateIf(parseWidth(el), !vm.direction)
       const animation = new Animator(vm.speed, function (p) {
         el.style.transform = `translateX(${ width - width * p }px)`
       })
       animation.animate(() => callback())
     },
     leave (vm, el, callback) {
-      const styles = getComputedStyle(el)
-      const widthText = styles.width
-      const width = vm.direction ? -parseFloat(widthText) : parseFloat(widthText)
+      const width = negateIf(parseWidth(el), vm.direction)
       const animation = new Animator(vm.speed, function (p) {
         el.style.transform = `translateX(${ width * p }px)`
       })
@@ -45,7 +47,7 @@ const animation = {
   fade: {
     beforeEnter (vm, el) {
       el.style.opacity = 0
-      el.style.transform = vm.direction ? 'translateX(10px)' : 'translateX(-10px)'
+      el.style.transform = `translateX(${vm.direction ? '10px' : '-10px'})`
     },
     enter (vm, el, callback) {
       const translate = vm.direction ? 10 : -10
