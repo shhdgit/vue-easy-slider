@@ -15,6 +15,7 @@
 <script>
 import Animator from './animator'
 
+// snovakovic@https://github.com/shhdgit/vue-easy-slider/pull/19
 const parseWidth = function(el) {
   const styles = getComputedStyle(el)
   const widthText = styles.width
