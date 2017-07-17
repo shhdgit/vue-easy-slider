@@ -24,6 +24,11 @@ const parseWidth = function(el) {
 
 const negateIf = (val, condition) => condition ? -val : val;
 
+const animate = function(speed, rule, callback) {
+  const animation = new Animator(speed, rule)
+  animation.animate(callback)
+}
+
 const animation = {
   normal: {
     beforeEnter (vm, el) {
@@ -32,17 +37,15 @@ const animation = {
     },
     enter (vm, el, callback) {
       const width = negateIf(parseWidth(el), !vm.direction)
-      const animation = new Animator(vm.speed, function (p) {
+      animate(vm.speed, (p) => {
         el.style.transform = `translateX(${ width - width * p }px)`
-      })
-      animation.animate(() => callback())
+      }, callback)
     },
     leave (vm, el, callback) {
       const width = negateIf(parseWidth(el), vm.direction)
-      const animation = new Animator(vm.speed, function (p) {
+      animate(vm.speed, (p) => {
         el.style.transform = `translateX(${ width * p }px)`
-      })
-      animation.animate(() => callback())
+      }, callback)
     },
   },
   fade: {
@@ -52,19 +55,17 @@ const animation = {
     },
     enter (vm, el, callback) {
       const translate = vm.direction ? 10 : -10
-      const animation = new Animator(vm.speed, function (p) {
+      animate(vm.speed, (p) => {
         el.style.opacity = p
         el.style.transform = `translateX(${ translate - translate * p }px)`
-      })
-      animation.animate(() => callback())
+      }, callback)
     },
     leave (vm, el, callback) {
       const translate = vm.direction ? -10 : 10
-      const animation = new Animator(vm.speed, function (p) {
+      animate(vm.speed, (p) => {
         el.style.opacity = 1 - p
         el.style.transform = `translateX(${ translate * p }px)`
-      })
-      animation.animate(() => callback())
+      }, callback)
     },
   },
 }
@@ -94,7 +95,7 @@ export default {
       animation[this.animation].beforeEnter(this, el)
     },
     enter (el, done) {
-      animation[this.animation].enter(this, el, () => done())
+      animation[this.animation].enter(this, el, done)
     },
     leave (el, done) {
       animation[this.animation].leave(this, el, () => {
@@ -126,14 +127,7 @@ export default {
 </script>
 
 <style scoped>
-.slider-item {
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 100%;
-}
+.slider-item,
 .wrap {
   position: absolute;
   top: 0;
