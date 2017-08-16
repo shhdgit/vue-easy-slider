@@ -11,7 +11,7 @@
 </head>
 <body>
   <div id="slider">
-    <slider animation="fade">
+    <slider animation="fade" v-if="a">
       <p style="line-height: 280px; font-size: 5rem; text-align: center;" v-if="!list.length">Loading...</p>
       <slider-item v-for="(i, index) in list" :key="index" :on-click="test">
         <div :style="i">
@@ -19,6 +19,7 @@
         </div>
       </slider-item>
     </slider>
+    <span @click="test">test</span>
   </div>
 
   <script src="https://unpkg.com/vue@2.2.4/dist/vue.min.js"></script>
@@ -28,11 +29,14 @@
       data () {
         return {
           list: [],
+          a: false
         }
       },
 
       methods: {
-        test () {console.log(1)}
+        test () {
+          this.a = !this.a
+        }
       },
 
       mounted () {
