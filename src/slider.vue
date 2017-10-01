@@ -73,7 +73,7 @@
 
     methods: {
       updateItems () {
-        const children = this.children = this.$children.filter(child => {
+        this.children = this.$children.filter(child => {
           return child.$options.name === 'easy-slider-item'
         })
         this.nowItemIndex = this.initIndex
@@ -88,8 +88,8 @@
         })
       },
       handleSetTopItem (nextItem, prevItem) {
-        if (nextItem && nextItem.$el.style) nextItem.$el.style.zIndex = 99
-        if (prevItem && prevItem.$el.style) prevItem.$el.style.zIndex = 98
+        if (nextItem && nextItem.$el) nextItem.$el.style.zIndex = 99
+        if (prevItem && prevItem.$el) prevItem.$el.style.zIndex = 98
       },
       autoplay () {
         if (!this.auto || this.childrenLength < 2) return
