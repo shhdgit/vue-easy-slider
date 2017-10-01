@@ -11,7 +11,7 @@ if (typeof window.requestAnimationFrame === 'undefined') {
   window.requestAnimationFrame = function (callback) {
     return setTimeout(function () {
       callback(nowtime())
-    }, 1000/60)
+    }, 1000 / 60)
   }
   window.cancelAnimationFrame = function (requestId) {
     return clearTimeout(requestId)
@@ -32,6 +32,7 @@ class Animator {
     const self = this
 
     let qId = 0
+
     function render (timestamp) {
       startTime = startTime || timestamp
 

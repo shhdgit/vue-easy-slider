@@ -16,7 +16,7 @@
 import Animator from './animator'
 
 // snovakovic@https://github.com/shhdgit/vue-easy-slider/pull/19
-const parseWidth = function(el) {
+const parseWidth = function (el) {
   const styles = getComputedStyle(el)
   const widthText = styles.width
   return parseFloat(widthText)
@@ -24,7 +24,7 @@ const parseWidth = function(el) {
 
 const negateIf = (val, condition) => condition ? -val : val;
 
-const animate = function(speed, rule, callback) {
+const animate = function (speed, rule, callback) {
   const animation = new Animator(speed, rule)
   animation.animate(callback)
 }
