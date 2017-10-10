@@ -133,6 +133,7 @@
       },
       indicatorHandle (i) {
         if (this.childrenLength < 2) return
+        if (i === this.nowItemIndex) return
         this.jump(i)
         this.autoplay()
       },
