@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="slider">
+      <slider animation="normal" :speed="1000">
+        <slider-item v-for="item in list" :style="{ backgroundColor: item.backgroundColor }"></slider-item>
+      </slider>
+    </div>
+
+    <script src="https://cdn.css.net/libs/vue/2.1.6/vue.min.js"></script>
+    <script>
+      new Vue({
+        el: '#slider',
+        data() {
+          return {
+            list: [{
+                backgroundColor: '#3f51b5'
+              },
+              {
+                backgroundColor: '#eee'
+              },
+              {
+                backgroundColor: '#f44336'
+              },
+            ]
+          }
+        },
+        components: {
+          'Slider': window['vue-easy-slider'].Slider,
+          'SliderItem': window['vue-easy-slider'].SliderItem
+        }
+      })
+
+    </script>
+  </body>
+
+</html>

@@ -6,6 +6,7 @@
 
 <script>
   export default {
+    name: 'slider-item',
     mounted () {
       const sliderContent = this.$parent
       sliderContent.$parent.newItem(this.$el)

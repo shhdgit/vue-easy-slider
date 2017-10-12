@@ -1,41 +1,28 @@
 <template>
-  <div class="slider"
-       :style="{ width: width, height: height }">
-    <component :is="animation"
-               :style="{ transition: 'all ' + thisSpeed + 's' }"
-               :speed="thisSpeed"
-               class="slider-content"
-               ref="content">
+  <div class="slider" :style="{ width: width, height: height }">
+    <component :is="animation" :style="{ transition: 'all ' + thisSpeed + 's' }" :speed="thisSpeed" class="slider-content" ref="content">
       <slot></slot>
     </component>
 
-    <div class="slider-btn slider-left-btn"
-         @click.stop="preview"
-         v-if="controlBtn">
+    <div class="slider-btn slider-left-btn" @click.stop="preview" v-if="controlBtn">
       <i class="slider-icon slider-icon-left"></i>
     </div>
-    <div class="slider-btn slider-right-btn"
-         @click.stop="next"
-         v-if="controlBtn">
+    <div class="slider-btn slider-right-btn" @click.stop="next" v-if="controlBtn">
       <i class="slider-icon slider-icon-right"></i>
     </div>
 
-    <div class="slider-indicators"
-         v-if="indicators !== false"
-         :class="indicatorClass"
-         @click.stop>
-      <i class="slider-indicator-icon"
-         v-for="( item, index ) in childrenArr"
-         :class="{ 'slider-indicator-active': posFlag === index }"
-         @click="jump2( index )"></i>
+    <div class="slider-indicators" v-if="indicators !== false" :class="indicatorClass" @click.stop>
+      <i class="slider-indicator-icon" v-for="( item, index ) in childrenArr" :key="index" :class="{ 'slider-indicator-active': posFlag === index }" @click="jump2( index )"></i>
     </div>
   </div>
 </template>
 
 <script>
+  import sliderItem from './slider-item.vue'
   import { normal, fade } from './animation'
 
   export default {
+    name: 'slider',
     data () {
       return {
         posFlag: 0,
@@ -43,7 +30,11 @@
         timer: null
       }
     },
-
+    comments: {
+      sliderItem,
+      normal,
+      fade
+    },
     props: {
       width: {
         type: String,
@@ -82,43 +73,41 @@
       thisSpeed () {
         let speed = this.speed / 1000
 
-        return speed.toFixed( 2 )
+        return speed.toFixed(2)
       },
       indicatorClass () {
-        if ( this.indicators ) {
-          return `slider-${ this.indicators }`
+        if (this.indicators) {
+          return `slider-${this.indicators}`
         }
       }
     },
 
     methods: {
       autoplay () {
-        let timer
-
         // Get animation's vm
         let content = this.$refs.content,
-            _this = this,
-            originPos = this.posFlag
+          _this = this,
+          originPos = this.posFlag
 
         function setTimer () {
-          return setInterval( () => {
-            if ( _this.posFlag < content.$children.length - 1 ) {
+          return setInterval(() => {
+            if (_this.posFlag < content.$children.length - 1) {
               _this.posFlag++
             } else {
               _this.posFlag = 0
             }
 
-            content.animation( originPos, _this.posFlag )
-          }, _this.interval )
+            content.animation(originPos, _this.posFlag)
+          }, _this.interval)
         }
 
         return function () {
-          if ( !!this.timer ) {
-            clearInterval( this.timer )
+          if (this.timer) {
+            clearInterval(this.timer)
             this.timer = setTimer()
           } else {
             // Config autoplay & slider item large than 2, coz slider is one of items
-            if ( _this.auto && content.$children.length > 1 ) {
+            if (_this.auto && content.$children.length > 1) {
               this.timer = setTimer()
             }
           }
@@ -127,55 +116,55 @@
       },
       next () {
         let content = this.$refs.content,
-            originPos = this.posFlag
+          originPos = this.posFlag
 
-        if ( this.posFlag < content.$children.length - 1 ) {
+        if (this.posFlag < content.$children.length - 1) {
           ++this.posFlag
         } else {
           this.posFlag = 0
         }
 
-        content.animation( originPos, this.posFlag )
+        content.animation(originPos, this.posFlag)
         // Clean the Timer, reset autoplay's interval time.
         this.autoplay()
       },
       preview () {
         let content = this.$refs.content,
-            originPos = this.posFlag
+          originPos = this.posFlag
 
-        if ( this.posFlag > 0 ) {
+        if (this.posFlag > 0) {
           --this.posFlag
         } else {
           this.posFlag = content.$children.length - 1
         }
 
-        content.animation( originPos, this.posFlag, 'preview' )
+        content.animation(originPos, this.posFlag, 'preview')
         this.autoplay()
       },
-      jump2 ( index ) {
+      jump2 (index) {
         let content = this.$refs.content,
-            originPos = this.posFlag
+          originPos = this.posFlag
 
-        content.animation( originPos, index, 'jump' )
+        content.animation(originPos, index, 'jump')
         this.posFlag = index
         this.autoplay()
       },
 
       addChildrenLength () {
-        this.childrenArr.push( this.childrenArr.length )
+        this.childrenArr.push(this.childrenArr.length)
       },
-      scaleItemsWidth ( item ) {
-        item.style.width = `${ this.$el.clientWidth }px`
+      scaleItemsWidth (item) {
+        item.style.width = `${this.$el.clientWidth}px`
       },
 
-      newItem ( item ) {
+      newItem (item) {
         const sliderContent = this.$refs.content
 
         this.addChildrenLength()
-        this.scaleItemsWidth( item )
+        this.scaleItemsWidth(item)
 
-        if ( sliderContent.scaleWidth ) {
-          sliderContent.scaleWidth( this.$el.clientWidth )
+        if (sliderContent.scaleWidth) {
+          sliderContent.scaleWidth(this.$el.clientWidth)
         }
         if (sliderContent.init) sliderContent.init()
 
@@ -191,11 +180,6 @@
 
     beforeDestroy () {
       clearInterval(this.timer)
-    },
-
-    components: {
-      normal,
-      fade
     }
   }
 </script>
@@ -206,11 +190,13 @@
 
     overflow: hidden;
   }
+
   .slider-content {
     position: relative;
 
     height: 100%;
   }
+
   .slider-indicators {
     position: absolute;
     bottom: 0;
@@ -218,17 +204,21 @@
 
     padding: 1rem;
   }
+
   .slider-center {
     left: 50%;
 
-    transform: translateX( -50% );
+    transform: translateX( -50%);
   }
+
   .slider-left {
     left: 0;
   }
+
   .slider-right {
     right: 0;
   }
+
   .slider-indicator-icon {
     display: inline-block;
     width: 10px;
@@ -237,35 +227,41 @@
 
     cursor: pointer;
     border-radius: 50%;
-    background-color: rgba( 0, 0, 0, .2 );
+    background-color: rgba( 0, 0, 0, .2);
   }
+
   .slider-indicator-active {
-    background-color: rgba( 255, 255, 255, .2 );
+    background-color: rgba( 255, 255, 255, .2);
   }
+
   .slider-btn {
     position: absolute;
     top: 50%;
     z-index: 99;
 
-    transform: translateY( -50% );
+    transform: translateY( -50%);
     cursor: pointer;
     background-color: #000;
     transition: opacity .3s;
     opacity: .3;
   }
+
   .slider-btn:hover {
     opacity: .5;
   }
+
   .slider-left-btn {
     left: 0;
 
     padding: 1rem .5rem .75rem .8rem;
   }
+
   .slider-right-btn {
     right: 0;
 
     padding: 1rem .8rem .75rem .5rem;
   }
+
   .slider-icon {
     display: inline-block;
     width: 20px;
@@ -273,10 +269,12 @@
     border-left: 2px solid #fff;
     border-bottom: 2px solid #fff;
   }
+
   .slider-icon-left {
-    transform: rotate( 45deg );
+    transform: rotate( 45deg);
   }
+
   .slider-icon-right {
-    transform: rotate( -135deg );
+    transform: rotate( -135deg);
   }
 </style>
