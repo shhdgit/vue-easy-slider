@@ -1,24 +1,24 @@
 <template>
   <div class="slider" :style="{ width: width, height: height }">
-    <component :is="animation" :style="{ transition: 'all ' + thisSpeed + 's' }" :speed="thisSpeed" class="slider-content" ref="content">
+    <component class="slider-content" :is="animation" :style="{ transition: 'all ' + thisSpeed + 's' }" :speed="thisSpeed" ref="content">
       <slot></slot>
     </component>
-
-    <div class="slider-btn slider-left-btn" @click.stop="preview" v-if="controlBtn">
-      <i class="slider-icon slider-icon-left"></i>
-    </div>
-    <div class="slider-btn slider-right-btn" @click.stop="next" v-if="controlBtn">
-      <i class="slider-icon slider-icon-right"></i>
-    </div>
-
-    <div class="slider-indicators" v-if="indicators !== false" :class="indicatorClass" @click.stop>
+    <template v-if="controlBtn">
+      <div class="slider-btn slider-left-btn" @click.stop="previous">
+        <i class="slider-icon slider-icon-left"></i>
+      </div>
+      <div class="slider-btn slider-right-btn" @click.stop="next">
+        <i class="slider-icon slider-icon-right"></i>
+      </div>
+    </template>
+    <div class="slider-indicators" v-if="indicators" :class="indicatorClass" @click.stop>
       <i class="slider-indicator-icon" v-for="( item, index ) in childrenArr" :key="index" :class="{ 'slider-indicator-active': posFlag === index }" @click="jump2( index )"></i>
     </div>
   </div>
 </template>
 
 <script>
-  import { normal, fade } from './animation'
+  // import { normal, fade } from './animation'
 
   export default {
     name: 'slider',
@@ -29,10 +29,10 @@
         timer: null
       }
     },
-    components: {
-      normal,
-      fade
-    },
+    // components: {
+    //   normal,
+    //   fade
+    // },
     props: {
       width: {
         type: String,
@@ -69,13 +69,13 @@
 
     computed: {
       thisSpeed () {
-        let speed = this.speed / 1000
-
-        return speed.toFixed(2)
+        return (this.speed / 1000).toFixed(2)
       },
       indicatorClass () {
         if (this.indicators) {
           return `slider-${this.indicators}`
+        } else {
+          return ''
         }
       }
     },
@@ -126,7 +126,7 @@
         // Clean the Timer, reset autoplay's interval time.
         this.autoplay()
       },
-      preview () {
+      previous () {
         let content = this.$refs.content,
           originPos = this.posFlag
 
@@ -136,7 +136,7 @@
           this.posFlag = content.$children.length - 1
         }
 
-        content.animation(originPos, this.posFlag, 'preview')
+        content.animation(originPos, this.posFlag, 'previous')
         this.autoplay()
       },
       jump2 (index) {
