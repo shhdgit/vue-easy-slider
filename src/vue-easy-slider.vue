@@ -18,7 +18,6 @@
 </template>
 
 <script>
-  import sliderItem from './slider-item.vue'
   import { normal, fade } from './animation'
 
   export default {
@@ -30,8 +29,7 @@
         timer: null
       }
     },
-    comments: {
-      sliderItem,
+    components: {
       normal,
       fade
     },
