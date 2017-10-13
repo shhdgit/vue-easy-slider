@@ -1,8 +1,8 @@
-import './pollyfills'
-import './plugins'
-
 import Vue from 'vue'
 import App from './App'
+
+import './pollyfills'
+import './plugins'
 
 Vue.config.productionTip = false
 

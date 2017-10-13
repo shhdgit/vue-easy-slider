@@ -1,8 +1,10 @@
 <template>
   <div class="slider" :style="{ width: width, height: height }">
-    <component class="slider-content" :is="animation" :style="{ transition: 'all ' + thisSpeed + 's' }" :speed="thisSpeed" ref="content">
-      <slot></slot>
-    </component>
+    <div class="slider-content" ref="content">
+      <transition-group appear :name="transitionName" mode="out-in" tag="div">
+        <slot></slot>
+      </transition-group>
+    </div>
     <template v-if="controlBtn">
       <div class="slider-btn slider-left-btn" @click.stop="previous">
         <i class="slider-icon slider-icon-left"></i>
@@ -11,28 +13,17 @@
         <i class="slider-icon slider-icon-right"></i>
       </div>
     </template>
-    <div class="slider-indicators" v-if="indicators" :class="indicatorClass" @click.stop>
-      <i class="slider-indicator-icon" v-for="( item, index ) in childrenArr" :key="index" :class="{ 'slider-indicator-active': posFlag === index }" @click="jump2( index )"></i>
+    <div class="slider-indicators" v-if="indicators" @click.stop>
+      <i class="slider-indicator-icon" v-for="(item, index) in itemsCount" :key="index" :class="{ 'slider-indicator-active': current === index }" @click="jumpTo( index )"></i>
     </div>
   </div>
 </template>
 
 <script>
-  // import { normal, fade } from './animation'
+  import * as debounce from 'lodash.debounce'
 
   export default {
     name: 'slider',
-    data () {
-      return {
-        posFlag: 0,
-        childrenArr: [],
-        timer: null
-      }
-    },
-    // components: {
-    //   normal,
-    //   fade
-    // },
     props: {
       width: {
         type: String,
@@ -55,7 +46,8 @@
         default: true
       },
       indicators: {
-        default: 'center'
+        type: Boolean,
+        default: true
       },
       controlBtn: {
         type: Boolean,
@@ -66,132 +58,53 @@
         default: 'normal'
       }
     },
-
+    data () {
+      return {
+        transitionName: 'slide-right',
+        current: 0,
+        itemsCount: 0,
+        timer: null
+      }
+    },
     computed: {
       thisSpeed () {
         return (this.speed / 1000).toFixed(2)
-      },
-      indicatorClass () {
-        if (this.indicators) {
-          return `slider-${this.indicators}`
-        } else {
-          return ''
-        }
       }
     },
 
     methods: {
-      autoplay () {
-        // Get animation's vm
-        let content = this.$refs.content,
-          _this = this,
-          originPos = this.posFlag
-
-        function setTimer () {
-          return setInterval(() => {
-            if (_this.posFlag < content.$children.length - 1) {
-              _this.posFlag++
-            } else {
-              _this.posFlag = 0
-            }
-
-            content.animation(originPos, _this.posFlag)
-          }, _this.interval)
-        }
-
-        return function () {
-          if (this.timer) {
-            clearInterval(this.timer)
-            this.timer = setTimer()
-          } else {
-            // Config autoplay & slider item large than 2, coz slider is one of items
-            if (_this.auto && content.$children.length > 1) {
-              this.timer = setTimer()
-            }
-          }
-        }
-
+      setItemsCount () {
+        this.itemsCount = this.$refs.content.children[0].children.length
       },
-      next () {
-        let content = this.$refs.content,
-          originPos = this.posFlag
-
-        if (this.posFlag < content.$children.length - 1) {
-          ++this.posFlag
-        } else {
-          this.posFlag = 0
-        }
-
-        content.animation(originPos, this.posFlag)
-        // Clean the Timer, reset autoplay's interval time.
-        this.autoplay()
-      },
-      previous () {
-        let content = this.$refs.content,
-          originPos = this.posFlag
-
-        if (this.posFlag > 0) {
-          --this.posFlag
-        } else {
-          this.posFlag = content.$children.length - 1
-        }
-
-        content.animation(originPos, this.posFlag, 'previous')
-        this.autoplay()
-      },
-      jump2 (index) {
-        let content = this.$refs.content,
-          originPos = this.posFlag
-
-        content.animation(originPos, index, 'jump')
-        this.posFlag = index
-        this.autoplay()
-      },
-
-      addChildrenLength () {
-        this.childrenArr.push(this.childrenArr.length)
-      },
-      scaleItemsWidth (item) {
-        item.style.width = `${this.$el.clientWidth}px`
-      },
-
-      newItem (item) {
-        const sliderContent = this.$refs.content
-
-        this.addChildrenLength()
-        this.scaleItemsWidth(item)
-
-        if (sliderContent.scaleWidth) {
-          sliderContent.scaleWidth(this.$el.clientWidth)
-        }
-        if (sliderContent.init) sliderContent.init()
-
-        this.autoplay()
-      }
+      autoplay () { },
+      next () { },
+      previous () { },
+      jumpTo () { }
     },
 
     mounted () {
-      // Init autoplay function.
-      this.autoplay = this.autoplay()
-      this.autoplay()
-    },
+      let items = this.$refs.content.children[0].children
+      for (var i = 0; i < items.length; i++) {
+        items[i].classList.add('slider-item')
+      }
 
-    beforeDestroy () {
-      clearInterval(this.timer)
+      this.$nextTick(() => {
+        this.setItemsCount()
+        // Init autoplay function.
+        this.autoplay()
+      })
     }
   }
 </script>
 
-<style scoped>
+<style>
   .slider {
     position: relative;
-
     overflow: hidden;
   }
 
   .slider-content {
     position: relative;
-
     height: 100%;
   }
 
@@ -199,49 +112,35 @@
     position: absolute;
     bottom: 0;
     z-index: 99;
-
-    padding: 1rem;
-  }
-
-  .slider-center {
     left: 50%;
-
     transform: translateX( -50%);
-  }
-
-  .slider-left {
-    left: 0;
-  }
-
-  .slider-right {
-    right: 0;
   }
 
   .slider-indicator-icon {
     display: inline-block;
-    width: 10px;
-    height: 10px;
-    margin: 0 .1rem;
-
+    width: 15px;
+    height: 15px;
+    margin: .5rem;
     cursor: pointer;
     border-radius: 50%;
-    background-color: rgba( 0, 0, 0, .2);
+    background-color: rgba( 0, 0, 0, .5);
+    border: 1px solid rgba( 255, 255, 255, .5);
   }
 
   .slider-indicator-active {
-    background-color: rgba( 255, 255, 255, .2);
+    background-color: rgba( 255, 255, 255, .5);
+    border: 1px solid rgba( 0, 0, 0, .5);
   }
 
   .slider-btn {
     position: absolute;
     top: 50%;
     z-index: 99;
-
     transform: translateY( -50%);
     cursor: pointer;
     background-color: #000;
     transition: opacity .3s;
-    opacity: .3;
+    opacity: .33;
   }
 
   .slider-btn:hover {
@@ -250,14 +149,12 @@
 
   .slider-left-btn {
     left: 0;
-
-    padding: 1rem .5rem .75rem .8rem;
+    padding: 2rem 1rem 1.5rem 2rem;
   }
 
   .slider-right-btn {
     right: 0;
-
-    padding: 1rem .8rem .75rem .5rem;
+    padding: 2rem 2rem 1.5rem 1rem;
   }
 
   .slider-icon {
@@ -274,5 +171,12 @@
 
   .slider-icon-right {
     transform: rotate( -135deg);
+  }
+
+  .slider-item {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: none;
   }
 </style>

@@ -1,17 +1,19 @@
 <template>
   <div>
-    <!-- Demo here -->
+    <div>
+      <slider :speed="1500">
+        <div v-for="(item, index) in list" :key="index">
+          <img :src="item.src" :alt="item.description" />
+          <span v-html="item.description"></span>
+        </div>
+      </slider>
+    </div>
     <br/>
     <h3>How to use</h3>
     <h4>Install</h4>
     <code>npm install vue-easy-slider --save</code>
     <h4>Use</h4>
     <code>import 'vue-easy-slider'</code>
-    <div class="container">
-      <slider animation="normal" :speed="1000">
-        <slider-item v-for="(item, index) in list" :key="index" :style="{ backgroundImage: item.src }" :alt="item.description"></slider-item>
-      </slider>
-    </div>
     <h3>Found any bug or feature request?
       <a href="https://github.com/shhdgit/vue-easy-slider/issues">Report Here!</a>
     </h3>
@@ -42,5 +44,20 @@
 </script>
 
 <style>
+  .slider-item img {
+    width: 100%;
+    height: auto;
+  }
 
+  .slider-item span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    top: 0.5rem;
+    font-size: 1.5em;
+    color: rgba(255, 255, 255, 1);
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+  }
 </style>
