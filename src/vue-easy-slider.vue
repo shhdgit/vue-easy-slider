@@ -35,7 +35,7 @@
       },
       interval: {
         type: Number,
-        default: 3000
+        default: 1000
       },
       speed: {
         type: Number,
@@ -102,7 +102,7 @@
           if (this.current === null) this.current = 0
           this.timer = window.setInterval(() => {
             this.next()
-          }, this.speed)
+          }, this.interval + this.speed)
         }
       },
       next () {

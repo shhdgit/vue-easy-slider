@@ -12,8 +12,16 @@
     <h3>How to use</h3>
     <h4>Install</h4>
     <code>npm install vue-easy-slider --save</code>
-    <h4>Use</h4>
-    <code>import 'vue-easy-slider'</code>
+    <h4>Use with npm</h4>
+    <code>import Vue from 'vue'</code><br/>
+    <code>import slider 'vue-easy-slider'</code><br/>
+    <code>Vue.use(slider)</code><br/>
+    <h4>Use with browser</h4>
+    <p>Just link the script and you are ready to go.</p>
+    <h3>How to customize</h3>
+    <p>You can customize slide and its contents style using the class
+      <code>slider-item</code>
+    </p>
     <h3>Found any bug or feature request?
       <a href="https://github.com/shhdgit/vue-easy-slider/issues">Report Here!</a>
     </h3>
@@ -36,7 +44,7 @@
         },
         {
           "src": "https://drscdn.500px.org/photo/118785927/m%3D2048/51dda482036d6d91f2902406c3e8f41f",
-          "description": ""
+          "description": "ipsum"
         }]
       }
     }
