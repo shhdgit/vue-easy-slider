@@ -65,10 +65,23 @@
     data () {
       return {
         transitionName: 'slide-right',
-        current: 0,
+        current: null,
         itemsCount: 0,
         timer: null,
         isPaused: false
+      }
+    },
+    watch: {
+      current (index) {
+        let items = this.$refs.content.children[0].children
+        for (var i = 0; i < items.length; i++) {
+          if (i === index) {
+            items[i].style.display = "block"
+          } else {
+            items[i].style.display = "none"
+          }
+        }
+        //TODO replace this code with v-if for transiton effect
       }
     },
     computed: {},
@@ -86,6 +99,7 @@
       },
       autoplay () {
         if (!this.isPaused) {
+          if (this.current === null) this.current = 0
           this.timer = window.setInterval(() => {
             this.next()
           }, this.speed)
