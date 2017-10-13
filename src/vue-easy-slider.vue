@@ -1,5 +1,5 @@
 <template>
-  <div class="slider" :style="{ width: width, height: height }">
+  <div class="slider" :style="{ width: width, height: height }" @mouseenter="throttleToggleAnimation" @mouseleave="throttleToggleAnimation">
     <div class="slider-content" ref="content">
       <transition-group appear :name="transitionName" mode="out-in" tag="div">
         <slot></slot>
@@ -56,6 +56,10 @@
       animation: {
         type: String,
         default: 'normal'
+      },
+      pauseOnHover: {
+        type: Boolean,
+        default: true
       }
     },
     data () {
@@ -63,34 +67,57 @@
         transitionName: 'slide-right',
         current: 0,
         itemsCount: 0,
-        timer: null
+        timer: null,
+        isPaused: false
       }
     },
-    computed: {
-      thisSpeed () {
-        return (this.speed / 1000).toFixed(2)
-      }
-    },
-
+    computed: {},
     methods: {
+      toggleAnimation () {
+        this.isPaused = !this.isPaused
+        this.autoplay()
+      },
+      throttleToggleAnimation () {
+        clearInterval(this.timer)
+        debounce(this.toggleAnimation, this.speed, { leading: true })()
+      },
       setItemsCount () {
         this.itemsCount = this.$refs.content.children[0].children.length
       },
-      autoplay () { },
-      next () { },
-      previous () { },
-      jumpTo () { }
+      autoplay () {
+        if (!this.isPaused) {
+          this.timer = window.setInterval(() => {
+            this.next()
+          }, this.speed)
+        }
+      },
+      next () {
+        if (this.current < this.itemsCount - 1) {
+          this.current++
+        } else {
+          this.current = 0
+        }
+      },
+      previous () {
+        if (this.current > 0) {
+          this.current--
+        } else {
+          this.current = this.itemsCount - 1
+        }
+      },
+      jumpTo (index) {
+        this.current = index
+      }
     },
-
     mounted () {
+      //add slider-item class to all items
       let items = this.$refs.content.children[0].children
       for (var i = 0; i < items.length; i++) {
         items[i].classList.add('slider-item')
       }
-
+      // Init autoplay function.
       this.$nextTick(() => {
         this.setItemsCount()
-        // Init autoplay function.
         this.autoplay()
       })
     }
