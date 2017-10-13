@@ -1,25 +1,31 @@
 <template>
   <div class="slider" :style="{ width: width, height: height }" @mouseenter="throttleToggleAnimation" @mouseleave="throttleToggleAnimation">
+    <!-- appear animation for slider-->
     <transition appear name="slide-up" mode="out-in" tag="div">
       <div>
-        <div class="slider-content">
-          <transition-group :name="transitionName" mode="out-in" tag="div">
-            <slot></slot>
+        <div class="slider-content" ref="content">
+          <!-- vuejs transitions -->
+          <transition-group :name="animation" mode="out-in" tag="div">
+            <!-- required for transition -->
+            <div v-for="(slide, index) in slides" :key="index" class="slider-item" v-html="slide" v-show="index === currentIndex"></div>
           </transition-group>
         </div>
         <template v-if="controls">
-          <div class="slider-btn slider-left-btn" @click.stop="previous">
-            <i class="slider-icon slider-icon-left"></i>
+          <div class="slider-btn left" @click.stop="previous">
+            <i class="slider-icon left"></i>
           </div>
-          <div class="slider-btn slider-right-btn" @click.stop="next">
-            <i class="slider-icon slider-icon-right"></i>
+          <div class="slider-btn right" @click.stop="next">
+            <i class="slider-icon right"></i>
           </div>
         </template>
         <div class="slider-indicators" v-if="indicators" @click.stop>
-          <i class="slider-indicator-icon" v-for="(item, index) in itemsCount" :key="index" :class="{ 'slider-indicator-active': current === index }" @click="jumpTo( index )"></i>
+          <i class="slider-indicator-icon" v-for="(item, index) in itemsCount" :key="index" :class="{ 'slider-indicator-active': currentIndex === index }" @click="jumpTo( index )"></i>
         </div>
       </div>
     </transition>
+    <div style="display: none!important; visibility: hidden!important;">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
@@ -69,23 +75,18 @@
     },
     data () {
       return {
-        transitionName: 'slide-right',
-        current: null,
-        itemsCount: 0,
+        currentIndex: null,
         timer: null,
-        isPaused: false
+        isPaused: false,
+        slides: []
       }
     },
-    watch: {
-      current (index) {
-        let items = this.$slots.default
-        for (var i = 0; i < items.length; i++) {
-          items[i].elm.style.display = i === index ? "block" : "none"
-        }
-        //TODO replace this code with v-if for transiton effect
+    watch: {},
+    computed: {
+      itemsCount () {
+        return this.slides.length
       }
     },
-    computed: {},
     methods: {
       toggleAnimation () {
         this.isPaused = !this.isPaused
@@ -95,44 +96,42 @@
         clearInterval(this.timer)
         debounce(this.toggleAnimation, this.speed, { leading: true })()
       },
-      setItemsCount () {
-        this.itemsCount = this.$slots.default.length
-      },
       autoplay () {
         if (!this.isPaused) {
-          if (this.current === null) this.current = 0
+          if (this.currentIndex === null) this.currentIndex = 0
           this.timer = window.setInterval(() => {
             this.next()
           }, this.interval + this.speed)
         }
       },
       next () {
-        if (this.current < this.itemsCount - 1) {
-          this.current++
+        if (this.currentIndex < this.itemsCount - 1) {
+          this.currentIndex++
         } else {
-          this.current = 0
+          this.currentIndex = 0
         }
       },
       previous () {
-        if (this.current > 0) {
-          this.current--
+        if (this.currentIndex > 0) {
+          this.currentIndex--
         } else {
-          this.current = this.itemsCount - 1
+          this.currentIndex = this.itemsCount - 1
         }
       },
       jumpTo (index) {
-        this.current = index
+        this.currentIndex = index
+      },
+      copySlots () {
+        // copy slots to manual list to prepare custom structure
+        this.$slots.default.forEach((item) => {
+          let tmp = item.elm.innerHTML
+          this.slides.push(tmp)
+        })
       }
     },
-    created () {
-      this.setItemsCount()
-    },
+    created () { },
     mounted () {
-      //add slider-item class to all items
-      let items = this.$slots.default
-      for (var i = 0; i < items.length; i++) {
-        items[i].elm.classList.add('slider-item')
-      }
+      this.copySlots()
       // Init autoplay function.
       this.$nextTick(() => {
         this.autoplay()
@@ -155,7 +154,6 @@
   .slider-indicators {
     position: absolute;
     bottom: 0;
-    z-index: 99;
     left: 50%;
     transform: translateX( -50%);
   }
@@ -184,19 +182,19 @@
     cursor: pointer;
     background-color: #000;
     transition: opacity .3s;
-    opacity: .33;
-  }
-
-  .slider-btn:hover {
     opacity: .5;
   }
 
-  .slider-left-btn {
+  .slider-btn:hover {
+    opacity: .75;
+  }
+
+  .slider-btn.left {
     left: 0;
     padding: 2rem 1rem 1.5rem 2rem;
   }
 
-  .slider-right-btn {
+  .slider-btn.right {
     right: 0;
     padding: 2rem 2rem 1.5rem 1rem;
   }
@@ -209,11 +207,11 @@
     border-bottom: 2px solid #fff;
   }
 
-  .slider-icon-left {
+  .slider-icon.left {
     transform: rotate( 45deg);
   }
 
-  .slider-icon-right {
+  .slider-icon.right {
     transform: rotate( -135deg);
   }
 
@@ -221,6 +219,5 @@
     width: 100%;
     height: 100%;
     position: relative;
-    display: none;
   }
 </style>
