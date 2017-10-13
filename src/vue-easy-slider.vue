@@ -1,25 +1,30 @@
 <template>
   <div class="slider" :style="{ width: width, height: height }" @mouseenter="throttleToggleAnimation" @mouseleave="throttleToggleAnimation">
-    <div class="slider-content" ref="content">
-      <transition-group appear :name="transitionName" mode="out-in" tag="div">
-        <slot></slot>
-      </transition-group>
-    </div>
-    <template v-if="controlBtn">
-      <div class="slider-btn slider-left-btn" @click.stop="previous">
-        <i class="slider-icon slider-icon-left"></i>
+    <transition appear name="slide-up" mode="out-in" tag="div">
+      <div>
+        <div class="slider-content">
+          <transition-group :name="transitionName" mode="out-in" tag="div">
+            <slot></slot>
+          </transition-group>
+        </div>
+        <template v-if="controls">
+          <div class="slider-btn slider-left-btn" @click.stop="previous">
+            <i class="slider-icon slider-icon-left"></i>
+          </div>
+          <div class="slider-btn slider-right-btn" @click.stop="next">
+            <i class="slider-icon slider-icon-right"></i>
+          </div>
+        </template>
+        <div class="slider-indicators" v-if="indicators" @click.stop>
+          <i class="slider-indicator-icon" v-for="(item, index) in itemsCount" :key="index" :class="{ 'slider-indicator-active': current === index }" @click="jumpTo( index )"></i>
+        </div>
       </div>
-      <div class="slider-btn slider-right-btn" @click.stop="next">
-        <i class="slider-icon slider-icon-right"></i>
-      </div>
-    </template>
-    <div class="slider-indicators" v-if="indicators" @click.stop>
-      <i class="slider-indicator-icon" v-for="(item, index) in itemsCount" :key="index" :class="{ 'slider-indicator-active': current === index }" @click="jumpTo( index )"></i>
-    </div>
+    </transition>
   </div>
 </template>
 
 <script>
+  import './index.css'
   import * as debounce from 'lodash.debounce'
 
   export default {
@@ -73,13 +78,9 @@
     },
     watch: {
       current (index) {
-        let items = this.$refs.content.children[0].children
+        let items = this.$slots.default
         for (var i = 0; i < items.length; i++) {
-          if (i === index) {
-            items[i].style.display = "block"
-          } else {
-            items[i].style.display = "none"
-          }
+          items[i].elm.style.display = i === index ? "block" : "none"
         }
         //TODO replace this code with v-if for transiton effect
       }
@@ -95,7 +96,7 @@
         debounce(this.toggleAnimation, this.speed, { leading: true })()
       },
       setItemsCount () {
-        this.itemsCount = this.$refs.content.children[0].children.length
+        this.itemsCount = this.$slots.default.length
       },
       autoplay () {
         if (!this.isPaused) {
@@ -123,15 +124,17 @@
         this.current = index
       }
     },
+    created () {
+      this.setItemsCount()
+    },
     mounted () {
       //add slider-item class to all items
-      let items = this.$refs.content.children[0].children
+      let items = this.$slots.default
       for (var i = 0; i < items.length; i++) {
-        items[i].classList.add('slider-item')
+        items[i].elm.classList.add('slider-item')
       }
       // Init autoplay function.
       this.$nextTick(() => {
-        this.setItemsCount()
         this.autoplay()
       })
     }

@@ -3,29 +3,32 @@
     <div>
       <slider :speed="1500">
         <div v-for="(item, index) in list" :key="index">
-          <img :src="item.src" :alt="item.description" />
+          <img :src="item.src" :alt="item.description">
           <span v-html="item.description"></span>
         </div>
       </slider>
     </div>
-    <br/>
+    <br>
     <h3>How to use</h3>
     <h4>Install</h4>
     <code>npm install vue-easy-slider --save</code>
     <h4>Use with npm</h4>
-    <code>import Vue from 'vue'</code><br/>
-    <code>import slider 'vue-easy-slider'</code><br/>
-    <code>Vue.use(slider)</code><br/>
+    <code>import Vue from 'vue'</code><br>
+    <code>import slider 'vue-easy-slider'</code><br>
+    <code>Vue.use(slider)</code><br>
     <h4>Use with browser</h4>
     <p>Just link the script and you are ready to go.</p>
     <h3>How to customize</h3>
     <p>You can customize slide and its contents style using the class
       <code>slider-item</code>
     </p>
+    <h3>Documentation</h3>
+    <p>Please visit the
+      <a href="https://github.com/shhdgit/vue-easy-slider/#usage">Readme</a> for options and guide.</p>
     <h3>Found any bug or feature request?
       <a href="https://github.com/shhdgit/vue-easy-slider/issues">Report Here!</a>
     </h3>
-    <br/>
+    <br>
   </div>
 </template>
 
@@ -36,15 +39,15 @@
       return {
         list: [{
           "src": "https://drscdn.500px.org/photo/118785927/m%3D2048/51dda482036d6d91f2902406c3e8f41f",
-          "description": "Lorem"
+          "description": "Title here"
         },
         {
           "src": "https://drscdn.500px.org/photo/118785927/m%3D2048/51dda482036d6d91f2902406c3e8f41f",
-          "description": "Lorem ipsum"
+          "description": "Another Title"
         },
         {
           "src": "https://drscdn.500px.org/photo/118785927/m%3D2048/51dda482036d6d91f2902406c3e8f41f",
-          "description": "ipsum"
+          "description": "Here it is again"
         }]
       }
     }
