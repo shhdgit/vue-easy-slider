@@ -2,48 +2,42 @@
 
 ## Intro
 
-vue-easy-slider is a slider component of Vue 2.x（[go 1.x](https://github.com/shhdgit/vue-easy-slider/tree/master)）.
+vue-easy-slider is a slider component of Vue 2.x [(go 1.x)](https://github.com/shhdgit/vue-easy-slider/tree/master).
 
 ## Demo
 
-[simple](https://jsfiddle.net/su9zv0w9/1/)
-
-[dynamic](https://jsfiddle.net/4nwvy4en/1/)
-
-## Download
-
-Download components from ./dist
+[Demo](https://shhdgit.github.com/vue-easy-slider/)
 
 ## Usage
 
 Work on a Vue instance:
 
-```JavaScript
-import { Slider, SliderItem } from 'vue-easy-slider'
+### npm
 
-new Vue( {
-  el: 'body',
-  components: {
-    Slider,
-    SliderItem
-  }
-} )
+```JavaScript
+import Vue from 'vue'
+import Slider from 'vue-easy-slider'
+
+Vue.use(Slider)
 ```
 
+### browser
+
+Just link the script and you are ready to go.
+
+## HTML
+
 ```HTML
-<slider width="800px"
-        animation="fade"
-        :interval="1000"
-        :speed="1000">
-  <slider-item :style="{ backgroundColor: '#3f51b5' }"></slider-item>
-  <slider-item :style="{ backgroundColor: '#eee' }"></slider-item>
-  <slider-item :style="{ backgroundColor: '#f44336' }"></slider-item>
+<slider :interval="1000" ><!-- specify options-->
+  <!-- Compose your own slides with any content-->
+  <div v-for="slide in slides" :key="slide.title">
+    <span v-html="slide.title"></span>
+    <img :title="slide.title" :src="slide.img"/>
+  </div>
 </slider>
 ```
 
-## Props
-
-Slider：
+## Options
 
 <table>
   <thead>
@@ -87,57 +81,31 @@ Slider：
     </tr>
     <tr>
       <td>indicators</td>
-      <td>'center', 'left', 'right', false</td>
-      <td>'center'</td>
-      <td>Show indicators on option position or hidden</td>
-    </tr>
-    <tr>
-      <td>control-btn</td>
       <td>Boolean</td>
       <td>true</td>
-      <td>Show control button</td>
+      <td>Show indicator buttons</td>
+    </tr>
+    <tr>
+      <td>controls</td>
+      <td>Boolean</td>
+      <td>true</td>
+      <td>Show control buttons</td>
     </tr>
     <tr>
       <td>animation</td>
-      <td>String - { normal, fade }</td>
-      <td>normal</td>
-      <td>Change animation</td>
+      <td>String</td>
+      <td>slide-right</td>
+      <td>animation class, you can write your own custom animation following vuejs animation style guidelines.</td>
     </tr>
-  </tbody>
-</table>
-
-## Slots
-
-SliderItem：
-
-<table>
-  <thead>
-  <tr>
-    <th>name</th>
-    <th>description</th>
-  </tr>
-  </thead>
-  <tbody>
     <tr>
-      <td>default</td>
-      <td>Item's content</td>
+      <td>pauseOnHover</td>
+      <td>Boolean</td>
+      <td>true</td>
+      <td>Pause the animation while mouse hover</td>
     </tr>
   </tbody>
 </table>
 
-usage:
-```HTML
-<slider>
-  <slider-item>
-    <div>
-      <img src="">
-      <p></p>
-      <button></button>
-    </div>
-  </slider-item>
-</slider>
-```
-
-# License
+## License
 
 MIT

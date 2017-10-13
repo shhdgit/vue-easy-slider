@@ -49,13 +49,13 @@
         type: Boolean,
         default: true
       },
-      controlBtn: {
+      controls: {
         type: Boolean,
         default: true
       },
       animation: {
         type: String,
-        default: 'normal'
+        default: 'slide-right'
       },
       pauseOnHover: {
         type: Boolean,
