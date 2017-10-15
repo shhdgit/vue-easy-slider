@@ -30,7 +30,7 @@
 </template>
 
 <script>
-  import './index.css'
+  import './animations.css'
   import * as debounce from 'lodash.debounce'
 
   export default {
