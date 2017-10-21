@@ -1,35 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Document</title>
-</head>
-<body>
-  <div id="slider">
-    <slider animation="normal"
-            :speed="1000">
-      <slider-item v-for="item in list" :style="{ backgroundColor: item.backgroundColor }"></slider-item>
-    </slider>
-  </div>
 
-  <script src="https://cdn.css.net/libs/vue/2.1.6/vue.min.js"></script>
-  <script>
-    new Vue( {
-      el: '#slider',
-      data () {
-        return {
-          list: [
-            { backgroundColor: '#3f51b5' },
-            { backgroundColor: '#eee' },
-            { backgroundColor: '#f44336' },
-          ]
-        }
-      },
-      components: {
-        'Slider': window[ 'vue-easy-slider' ].Slider,
-        'SliderItem': window[ 'vue-easy-slider' ].SliderItem
-      }
-    } )
-  </script>
-</body>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta HTTP-EQUIV="CACHE-CONTROL" CONTENT="Public">
+    <meta name="description" content="Documentation for Vue Easy Slider">
+    <meta name="keywords" content="vuejs, slider">
+    <meta name="author" content="https://github.com/shhdgit">
+    <title>Vue Easy Slider Documentation</title>
+  </head>
+
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+
 </html>
