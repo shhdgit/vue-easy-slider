@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "vue": "^2.5.0",
+    "vue2-touch-events": "^0.2.3",
     "lodash.debounce": "^4.0.8"
   },
   "devDependencies": {

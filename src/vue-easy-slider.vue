@@ -2,7 +2,7 @@
   <div class="slider" :style="{ width: width, height: height }" @mouseenter="throttleToggleAnimation" @mouseleave="throttleToggleAnimation">
     <!-- appear animation for slider-->
     <transition appear name="slide-up" mode="out-in" tag="div">
-      <div>
+      <div v-touch:swipe.right="swipeHandleRight" v-touch:swipe.left="swipeHandleLeft">
         <div class="slider-content" ref="content">
           <!-- vuejs transitions -->
           <transition-group :name="animation" mode="out-in" tag="div">
@@ -104,6 +104,16 @@
           }, this.interval + this.speed)
         }
       },
+      swipeHandleRight () {
+        clearInterval(this.timer)
+        this.previous()
+        this.autoplay()
+      },
+      swipeHandleLeft () {
+        clearInterval(this.timer)
+        this.next()
+        this.autoplay()
+      },
       next () {
         if (this.currentIndex < this.itemsCount - 1) {
           this.currentIndex++
@@ -123,13 +133,13 @@
       },
       copySlots () {
         // copy slots to manual list to prepare custom structure
-        this.$slots.default.forEach((item) => {
+        this.$slots.default.forEach(item => {
           let tmp = item.elm.innerHTML
           this.slides.push(tmp)
         })
       }
     },
-    created () { },
+    created () {},
     mounted () {
       this.copySlots()
       // Init autoplay function.
@@ -144,6 +154,8 @@
   .slider {
     position: relative;
     overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
   }
 
   .slider-content {
@@ -155,38 +167,38 @@
     position: absolute;
     bottom: 0;
     left: 50%;
-    transform: translateX( -50%);
+    transform: translateX(-50%);
   }
 
   .slider-indicator-icon {
     display: inline-block;
     width: 15px;
     height: 15px;
-    margin: .5rem;
+    margin: 0.5rem;
     cursor: pointer;
     border-radius: 50%;
-    background-color: rgba( 0, 0, 0, .5);
-    border: 1px solid rgba( 255, 255, 255, .5);
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.5);
   }
 
   .slider-indicator-active {
-    background-color: rgba( 255, 255, 255, .5);
-    border: 1px solid rgba( 0, 0, 0, .5);
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.5);
   }
 
   .slider-btn {
     position: absolute;
     top: 50%;
     z-index: 99;
-    transform: translateY( -50%);
+    transform: translateY(-50%);
     cursor: pointer;
     background-color: #000;
-    transition: opacity .3s;
-    opacity: .5;
+    transition: opacity 0.3s;
+    opacity: 0.5;
   }
 
   .slider-btn:hover {
-    opacity: .75;
+    opacity: 0.75;
   }
 
   .slider-btn.left {
@@ -208,11 +220,17 @@
   }
 
   .slider-icon.left {
-    transform: rotate( 45deg);
+    transform: rotate(45deg);
   }
 
   .slider-icon.right {
-    transform: rotate( -135deg);
+    transform: rotate(-135deg);
+  }
+
+  @media (max-width: 760px), screen and (orientation: portrait) {
+    .slider-btn {
+      display: none;
+    }
   }
 
   .slider-item {

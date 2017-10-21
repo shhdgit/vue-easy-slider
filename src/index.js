@@ -1,7 +1,9 @@
+import vueTouchEvents from 'vue2-touch-events'
 import slider from './vue-easy-slider'
 
 const vueEasySlider = {
-  install: function (Vue) {
+  install: function(Vue) {
+    Vue.use(vueTouchEvents)
     Vue.component(slider.name, slider)
   }
 }
