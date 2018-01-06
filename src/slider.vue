@@ -4,7 +4,11 @@
       <slot></slot>
     </div>
     <div :class="`indicators indi-${ indicators }`" @click.stop v-if="indicators">
-      <span :key="i" :class="{ 'slider-indicator-active': nowItemIndex === i - 1 }" @click="indicatorHandle(i - 1)" v-for="i in childrenLength" class="slider-indicator-icon"></span>
+      <span 
+      :key="i" 
+      :class="{ 'slider-indicator-active': nowItemIndex === i - 1 }" 
+      @click="indicatorHandle(i - 1)" 
+      v-for="i in childrenLength" class="slider-indicator-icon"></span>
     </div>
     <button @click.stop="prev" v-if="controlBtn" class="btn btn-left">
       <i class="slider-icon slider-icon-left"></i>
@@ -16,6 +20,7 @@
 </template>
 
 <script>
+/* eslint-disable */
   import { throttle, debounce } from './utils'
 
   export default {
@@ -63,6 +68,10 @@
         type: Number,
         default: 0,
       },
+      currentIndex: {
+          type: Number,
+          default: -1
+      }
     },
 
     computed: {
@@ -137,6 +146,14 @@
         this.jump(i)
         this.autoplay()
       },
+    },
+
+    watch: {
+        currentIndex(newIndex) {
+            if (newIndex !== -1) {
+                this.jump(newIndex);
+            }
+        }
     },
 
     created () {
