@@ -115,6 +115,12 @@ Slider：
       <td>0</td>
       <td>Index of the initially active slide</td>
     </tr>
+    <tr>
+      <td>current-number</td>
+      <td>Number</td>
+      <td>-1 (disabled)</td>
+      <td>Index of current active slide</td>
+    </tr>
   </tbody>
 </table>
 
