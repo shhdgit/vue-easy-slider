@@ -1,6 +1,6 @@
 {
   "name": "vue-easy-slider",
-  "version": "3.1.7",
+  "version": "3.1.8",
   "description": "vue-easy-slider is a slider component of Vue.js.",
   "keywords": [
     "vue",
@@ -18,7 +18,8 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "webpack-dev-server --config ./webpack.config.dev.js --hot --inline",
-    "build": "rimraf ./dist && webpack --config ./webpack.config.js"
+    "build": "rimraf ./dist && webpack --config ./webpack.config.js",
+    "start": "npm run dev"
   },
   "devDependencies": {
     "babel-core": "^6.10.4",
