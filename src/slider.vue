@@ -105,6 +105,7 @@
         const self = this
         function setTimer () {
           return setInterval(() => {
+            if(!self.auto) return
             const nextIndex = (self.nowItemIndex + 1) % self.childrenLength
             self.jump(nextIndex)
           }, self.interval)
