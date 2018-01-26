@@ -4,10 +4,10 @@
       <slot></slot>
     </div>
     <div :class="`indicators indi-${ indicators }`" @click.stop v-if="indicators">
-      <span 
-      :key="i" 
-      :class="{ 'slider-indicator-active': nowItemIndex === i - 1 }" 
-      @click="indicatorHandle(i - 1)" 
+      <span
+      :key="i"
+      :class="{ 'slider-indicator-active': nowItemIndex === i - 1 }"
+      @click="indicatorHandle(i - 1)"
       v-for="i in childrenLength" class="slider-indicator-icon"></span>
     </div>
     <button @click.stop="prev" v-if="controlBtn" class="btn btn-left">
@@ -69,9 +69,17 @@
         default: 0,
       },
       currentIndex: {
-          type: Number,
-          default: -1
-      }
+        type: Number,
+        default: -1
+      },
+      beforePrevious: {
+        type: Function,
+        default: () => true,
+      },
+      beforeNext: {
+        type: Function,
+        default: () => true,
+      },
     },
 
     computed: {
@@ -128,6 +136,7 @@
         }
       },
       prev () {
+        if (!this.beforePrevious()) return
         if (this.childrenLength < 2) return
         const nextIndex = this.nowItemIndex - 1 === -1 ? this.childrenLength - 1 : this.nowItemIndex - 1
         this.$emit('previous', { original: this.nowItemIndex, next: nextIndex });
@@ -135,6 +144,7 @@
         this.autoplay()
       },
       next () {
+        if (!this.beforeNext()) return
         if (this.childrenLength < 2) return
         const nextIndex = (this.nowItemIndex + 1) % this.childrenLength
         this.$emit('next', { original: this.nowItemIndex, next: nextIndex });

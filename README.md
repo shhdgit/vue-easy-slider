@@ -9,7 +9,7 @@ vue-easy-slider is a slider component of Vue 2.x
 ## Install
 
 ```bash
-$ npm i -S vue-easy-slider
+npm i -S vue-easy-slider
 ```
 
 ## Usage
@@ -51,149 +51,47 @@ new Vue( {
 
 Slider：
 
-<table>
-  <thead>
-  <tr>
-    <th>name</th>
-    <th>type</th>
-    <th>default</th>
-    <th>description</th>
-  </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>width</td>
-      <td>String</td>
-      <td>auto</td>
-      <td>The width of the slider</td>
-    </tr>
-    <tr>
-      <td>height</td>
-      <td>String</td>
-      <td>300px</td>
-      <td>The height of the slider</td>
-    </tr>
-    <tr>
-      <td>interval</td>
-      <td>Number</td>
-      <td>3000</td>
-      <td>Delay of auto slider( auto option should be true )</td>
-    </tr>
-    <tr>
-      <td>speed</td>
-      <td>Number</td>
-      <td>300</td>
-      <td>Speed of animation</td>
-    </tr>
-    <tr>
-      <td>auto</td>
-      <td>Boolean</td>
-      <td>true</td>
-      <td>Autoplay</td>
-    </tr>
-    <tr>
-      <td>indicators</td>
-      <td>'center', 'left', 'right', false</td>
-      <td>'center'</td>
-      <td>Show indicators on option position or hidden</td>
-    </tr>
-    <tr>
-      <td>control-btn</td>
-      <td>Boolean</td>
-      <td>true</td>
-      <td>Show control button</td>
-    </tr>
-    <tr>
-      <td>animation</td>
-      <td>String - { normal, fade }</td>
-      <td>normal</td>
-      <td>Change animation</td>
-    </tr>
-    <tr>
-      <td>init-index</td>
-      <td>Number</td>
-      <td>0</td>
-      <td>Index of the initially active slide</td>
-    </tr>
-    <tr>
-      <td>current-number</td>
-      <td>Number</td>
-      <td>-1 (disabled)</td>
-      <td>Index of current active slide</td>
-    </tr>
-  </tbody>
-</table>
+|name|type|default|description|
+|----|----|-------|-----------|
+|width|String|auto|The width of the slider|
+|height|String|300px|The height of the slider|
+|interval|Number|3000|Delay of auto slider( auto option should be true )|
+|speed|Number|300|Speed(ms) of animation|
+|auto|Boolean|true|Autoplay|
+|indicators|'center', 'left', 'right', false|'center'|Show indicators on option position or hidden|
+|control-btn|Boolean|true|Show control button|
+|animation|'normal', 'fade'|'normal'|Change animation|
+|init-index|Number|0|Index of the initially active slide|
+|current-number|Number|-1 (disabled)|Index of current active slide|
+|before-next|Function|() => true|Before next guard, sliding to next item when this function return true|
+|before-previous|Function|() => true|Before previous guard|
 
 ## Events
 
 Slider：
 
-<table>
-  <thead>
-  <tr>
-    <th>name</th>
-    <th>description</th>
-    <th>$event</th>
-  </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>changeSlide</td>
-      <td>Fires when the slide change</td>
-      <td>$event.index</td>
-    </tr>
-    <tr>
-      <td>next</td>
-      <td>Fires when the button for the next slide was pressed</td>
-      <td>$event.original, $event.next</td>
-    </tr>
-    <tr>
-      <td>previous</td>
-      <td>Fires when the button for the previous slide was pressed</td>
-      <td>$event.original, $event.next</td>
-    </tr>
-  </tbody>
-</table>
+|name|description|$event|
+|----|-----------|------|
+|changeSlide|Fires when the slide change|$event.index|
+|next|Fires when the button for the next slide was pressed|$event.original, $event.next|
+|previous|Fires when the button for the previous slide was pressed|$event.original, $event.next|
 
 SliderItem:
 
-<table>
-  <thead>
-  <tr>
-    <th>name</th>
-    <th>description</th>
-    <th>$event</th>
-  </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>onClick</td>
-      <td>Click event</td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
+|name|description|$event|
+|----|-----------|------|
+|onClick|Click event||
 
 ## Slots
 
 SliderItem：
 
-<table>
-  <thead>
-  <tr>
-    <th>name</th>
-    <th>description</th>
-  </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>default</td>
-      <td>Item's content</td>
-    </tr>
-  </tbody>
-</table>
+|name|description|
+|----|-----------|
+|default|Item content|
 
 usage:
+
 ```HTML
 <slider>
   <slider-item>
@@ -207,4 +105,5 @@ usage:
 ```
 
 # License
+
 MIT
