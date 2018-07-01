@@ -101,7 +101,7 @@
         if (prevItem && prevItem.$el) prevItem.$el.style.zIndex = 98
       },
       autoplay () {
-        if (!this.auto || this.childrenLength < 2) return
+        if (this.childrenLength < 2) return
         const self = this
         function setTimer () {
           return setInterval(() => {
