@@ -60,11 +60,46 @@ Slider：
 |auto|Boolean|true|Autoplay|
 |indicators|'center', 'left', 'right', false|'center'|Show indicators on option position or hidden|
 |control-btn|Boolean|true|Show control button|
-|animation|'normal', 'fade'|'normal'|Change animation|
+|animation|'normal', 'fade', 'customize'|'normal'|Change animation|
 |init-index|Number|0|Index of the initially active slide|
 |current-number|Number|-1 (disabled)|Index of current active slide|
 |before-next|Function|() => true|Before next guard, sliding to next item when this function return true|
 |before-previous|Function|() => true|Before previous guard|
+|customize|Function|() => true|Inject your own custom animation|
+
+`customize` prop example:
+
+Template section:
+```JavaScript
+<slider 
+  animation="customize"
+  :customize="customAnimation"
+>
+...
+</slider>
+```
+Methods section:
+(Example of pure fade, without any shifts)
+```JavaScript
+customAnimation (animate) {
+  return {
+    beforeEnter (vm, el) {
+      el.style.opacity = 0
+    },
+    enter (vm, el, callback) {
+      animate(vm.speed, (p) => {
+        el.style.opacity = p
+      }, callback)
+    },
+    leave (vm, el, callback) {
+      animate(vm.speed, (p) => {
+        el.style.opacity = 1 - p
+      }, callback)
+    },
+  }
+}
+```
+
 
 ## Events
 

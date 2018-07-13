@@ -64,6 +64,10 @@
         type: String,
         default: 'normal'
       },
+      customize: {
+        type: Function,
+        default: () => true,
+      },
       initIndex: {
         type: Number,
         default: 0,

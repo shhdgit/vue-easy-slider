@@ -122,6 +122,7 @@ export default {
     this.$parent.handleItemChange()
     this.speed = this.$parent.speed
     this.animation = this.$parent.animation
+    animation.customize = this.$parent.customize(animate)
   },
 }
 </script>
