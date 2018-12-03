@@ -1,0 +1,45 @@
+{
+  "name": "vue-easy-slider",
+  "version": "5.0.13",
+  "description": "vue-easy-slider is a slider component of Vue.js.",
+  "keywords": [
+    "vue",
+    "vue-component",
+    "vue-slider",
+    "slide"
+  ],
+  "homepage": "https://github.com/shhdgit/vue-easy-slider",
+  "author": "Suhaha < jklopsdfw@gmail.com >",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:shhdgit/vue-easy-slider.git"
+  },
+  "license": "MIT",
+  "main": "dist/vue-easy-slider.js",
+  "module": "dist/vue-easy-slider.esm.js",
+  "browser": "dist/vue-easy-slider.min.js",
+  "unpkg": "dist/vue-easy-slider.min.js",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production rollup -c",
+    "dev": "cross-env NODE_ENV=development rollup -c -w",
+    "test": "node test/test.js",
+    "pretest": "npm run build"
+  },
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "eslint-plugin-vue": "^4.7.1",
+    "rollup": "^0.67.3",
+    "rollup-plugin-buble": "^0.19.4",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-eslint": "^5.0.0",
+    "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-uglify": "^6.0.0",
+    "rollup-plugin-vue": "^4.3.2",
+    "stylus": "^0.54.5",
+    "uglify-es": "^3.3.9",
+    "vue-template-compiler": "^2.5.17"
+  },
+  "dependencies": {
+    "vue": "^2.5.17"
+  }
+}

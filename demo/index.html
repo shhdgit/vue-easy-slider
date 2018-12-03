@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style type="text/css">
+      p {
+        margin: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="slider">
+      {{ testv }}
+      <slider animation="fade" v-model="testv">
+        <slider-item
+          v-for="(i, index) in list"
+          :key="index"
+          @click="test"
+          :style="i"
+        >
+          <p style="line-height: 280px; font-size: 5rem; text-align: center;">
+            Page{{ index + 1 }}
+          </p>
+        </slider-item>
+      </slider>
+    </div>
+
+    <script src="https://unpkg.com/vue@2.5.17/dist/vue.min.js"></script>
+    <script src="../dist/vue-easy-slider.js"></script>
+    <script>
+      new Vue({
+        el: '#slider',
+        data() {
+          return {
+            list: [],
+            testv: 2,
+          }
+        },
+        methods: {
+          test() {
+            this.testv = 1
+          },
+        },
+        mounted() {
+          setTimeout(
+            () =>
+              (this.list = [
+                {
+                  backgroundColor: '#3f51b5',
+                  width: '100%',
+                  height: '100%',
+                },
+                {
+                  backgroundColor: '#eee',
+                  width: '100%',
+                  height: '100%',
+                },
+                {
+                  backgroundColor: '#f44336',
+                  width: '100%',
+                  height: '100%',
+                },
+                {
+                  backgroundColor: '#eee',
+                  width: '100%',
+                  height: '100%',
+                },
+              ]),
+            3000,
+          )
+        },
+        components: {
+          Slider: window.VueEasySlider.Slider,
+          SliderItem: window.VueEasySlider.SliderItem,
+        },
+      })
+    </script>
+  </body>
+</html>

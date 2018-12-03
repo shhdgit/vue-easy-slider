@@ -1,0 +1,28 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "extends": ["eslint:recommended", "plugin:vue/recommended"],
+  "rules": {
+    "no-console": "off",
+    "no-extra-semi": "error",
+    "no-unused-vars": "warn",
+    "no-multiple-empty-lines": [
+      2,
+      {
+        "max": 1
+      }
+    ],
+    "vue/max-attributes-per-line": "off"
+  }
+}
