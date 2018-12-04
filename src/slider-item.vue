@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'EasySliderItem',
+  name: 'SliderItem',
   data() {
     return {
       display: false,

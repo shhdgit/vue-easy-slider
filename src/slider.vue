@@ -40,7 +40,7 @@
 import { throttle, debounce } from './utils'
 
 export default {
-  name: 'EasySlider',
+  name: 'Slider',
   model: {
     prop: 'value',
     event: 'change',
