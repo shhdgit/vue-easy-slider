@@ -9,7 +9,7 @@
         </div>
       </div>
     </slot>
-    <div class="slider-items">
+    <div ref="touchArea" class="slider-items">
       <slot/>
     </div>
     <div
@@ -38,6 +38,7 @@
 
 <script>
 import { throttle, debounce } from './utils'
+import AlloyFinger from './alloyfinger'
 
 export default {
   name: 'Slider',
@@ -57,6 +58,10 @@ export default {
     height: {
       type: String,
       default: '300px',
+    },
+    touch: {
+      type: Boolean,
+      default: true,
     },
     animation: {
       type: String,
@@ -96,6 +101,7 @@ export default {
       sliderItems: [],
       currentIndex: 0,
       timer: 0,
+      af: null,
     }
   },
 
@@ -116,16 +122,20 @@ export default {
   },
   mounted() {
     this.init()
+    this.initTouchArea()
   },
   // init when keep-alive
   activated() {
     this.init()
+    this.initTouchArea()
   },
   beforeDestroy() {
     this.timer && clearInterval(this.timer)
+    this.af && this.af.destroy()
   },
   deactivated() {
     this.timer && clearInterval(this.timer)
+    this.af && this.af.destroy()
   },
 
   methods: {
@@ -144,6 +154,17 @@ export default {
 
       currentItem.init()
       this.auto()
+    },
+    initTouchArea() {
+      if (this.af || !this.touch) return
+
+      const touchArea = this.$refs.touchArea
+
+      this.af = new AlloyFinger(touchArea, {
+        swipe: e => {
+          e.direction === 'Left' ? this.next() : this.prev()
+        },
+      })
     },
     auto() {
       if (!this.autoplay || this.sliderItems.length < 2) return

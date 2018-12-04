@@ -34,7 +34,6 @@ export default {
     init() {
       this.isInit = true
       this.display = true
-
       this.$nextTick(() => (this.isInit = false))
     },
     // direction: left: true, right: false
