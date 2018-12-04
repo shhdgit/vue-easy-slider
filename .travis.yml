@@ -2,16 +2,31 @@ language: node_js
 node_js:
   - '10.9.0'
 
-env:
-  - TASK=test
-  - TASK=build
+stages:
+  - test
+  - name: deploy
 
-script:
-  - npm run $TASK
+jobs:
+  include:
+    - stage: test
+      script:
+        - node --version
+        - npm --version
+        - echo "Testing Started ..."
+        - npm test
+        - echo "Testing Finished."
 
-deploy:
-  provider: npm
-  email: 'jklopsdfw@gmail.com'
-  api_key: npm_key
-  on:
-    tags: true
+    - stage: deploy
+      script:
+        - echo "NPM Deploying Started ..."
+        - npm version
+        - npm run build
+        - echo "NPM Building Finished."
+
+      deploy:
+        provider: npm
+        email: '$npm_email'
+        api_key: '$npm_key'
+        skip_cleanup: true
+        on:
+          tags: true
