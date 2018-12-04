@@ -51,7 +51,7 @@ const isProduction = process.env.NODE_ENV === `production`
 
 if (isProduction) {
   config.forEach(c => {
-    if (c.output.format === 'es') return
+    if (c.output.format !== 'iife') return
     c.plugins.push(uglify({}, minify))
   })
 }
