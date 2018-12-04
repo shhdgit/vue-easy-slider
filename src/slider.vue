@@ -131,7 +131,7 @@ export default {
   methods: {
     init() {
       this.sliderItems = this.$children.filter(child => {
-        return child.$options.name === 'EasySliderItem'
+        return child.$options.name === 'SliderItem'
       })
 
       if (this.sliderItems[this.value]) {
