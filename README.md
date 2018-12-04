@@ -105,7 +105,7 @@ Slider：
 | --------------- | -------------------------------- | ---------- | ---------------------------------------------------------------------- |
 | width           | String                           | auto       | Slider width                                                           |
 | height          | String                           | 300px      | Slider height                                                          |
-| touch           | Boolean                          | true       | Enable touch slide support                                             |
+| touch           | Boolean                          | true       | Enable touch slide                                                     |
 | animation       | 'normal', 'fade'                 | 'normal'   | Change animation                                                       |
 | autoplay        | Boolean                          | true       | Autoplay                                                               |
 | interval        | Number                           | 3000       | Delay of autoplay ( autoplay option should be true )                   |
