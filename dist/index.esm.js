@@ -931,12 +931,11 @@ var __vue_staticRenderFns__$1 = [];
     undefined
   );
 
-var VueEasySlider = {
+var SliderPlugin = {
   install: function install(Vue) {
     Vue.component(Slider.name, Slider);
     Vue.component(SliderItem.name, SliderItem);
   },
 };
 
-export default VueEasySlider;
-export { Slider, SliderItem };
+export { Slider, SliderItem, SliderPlugin };

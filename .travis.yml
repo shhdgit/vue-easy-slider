@@ -1,0 +1,15 @@
+language: node_js
+
+env:
+  - TASK=test
+  - TASK=build
+
+script:
+  - npm run $TASK
+
+deploy:
+  provider: npm
+  email: 'jklopsdfw@gmail.com'
+  api_key: npm_key
+  on:
+    tags: true

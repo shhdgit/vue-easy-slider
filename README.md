@@ -18,13 +18,13 @@ npm i -S vue-easy-slider
 
 ## Usage
 
-Install like plugin:
+Plugin install:
 
 ```js
 import Vue from 'vue'
-import Slider from 'vue-easy-slider/dist/index.js'
+import { SliderPlugin } from 'vue-easy-slider/dist/index.js'
 
-Vue.use(Slider)
+Vue.use(SliderPlugin)
 ```
 
 Or work on a Vue instance:
