@@ -1,6 +1,6 @@
 {
   "name": "vue-easy-slider",
-  "version": "5.1.1",
+  "version": "5.1.2",
   "description": "vue-easy-slider is a slider component of Vue.js.",
   "keywords": [
     "vue",
@@ -15,8 +15,8 @@
     "url": "git@github.com:shhdgit/vue-easy-slider.git"
   },
   "license": "MIT",
-  "main": "dist/vue-easy-slider.js",
-  "module": "dist/vue-easy-slider.esm.js",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
   "browser": "dist/vue-easy-slider.min.js",
   "unpkg": "dist/vue-easy-slider.min.js",
   "jsdelivr": "dist/vue-easy-slider.min.js",

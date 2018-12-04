@@ -18,7 +18,7 @@ Install like plugin:
 
 ```js
 import Vue from 'vue'
-import Slider from 'vue-easy-slider/dist/vue-easy-slider.js'
+import Slider from 'vue-easy-slider/dist/index.js'
 
 Vue.use(Slider)
 ```
@@ -39,11 +39,15 @@ Or work on a Vue instance:
 ```
 
 ```JavaScript
-import { Slider, SliderItem } from 'vue-easy-slider/dist/vue-easy-slider.js'
+import { Slider, SliderItem } from 'vue-easy-slider/dist/index.js'
 
-new Vue( {
+new Vue({
   el: 'body',
-  data () {
+  components: {
+    Slider,
+    SliderItem,
+  },
+  data() {
     return {
       list: [
         { backgroundColor: '#3f51b5', width: '100%', height: '100%' },
@@ -55,13 +59,9 @@ new Vue( {
   methods: {
     hello($event) {
       console.log(`hello index: ${$event}`)
-    }
+    },
   },
-  components: {
-    Slider,
-    SliderItem
-  }
-} )
+})
 ```
 
 Control slider with v-model
@@ -74,7 +74,7 @@ Control slider with v-model
 ```
 ```JavaScript
 ...
-  data () {
+  data() {
     return {
       // initial index
       sliderIndex: 1,
@@ -88,7 +88,7 @@ Control slider with v-model
   methods: {
     moveToIndex(index) {
       this.sliderIndex = index
-    }
+    },
   },
 ...
 ```
