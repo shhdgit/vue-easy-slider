@@ -1,6 +1,10 @@
-## Intro
+# vue-easy-slider
 
-vue-easy-slider is a slider component of Vue.js
+[![npm package](https://img.shields.io/npm/v/vue-easy-slider.svg?style=flat-square)](https://www.npmjs.org/package/vue-easy-slider)
+[![NPM downloads](http://img.shields.io/npm/dw/vue-easy-slider.svg?style=flat-square)](https://npmjs.org/package/vue-easy-slider)
+[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/shhdgit/vue-easy-slider/blob/master/LICENCE)
+
+Keep slider simple!
 
 ## Demo
 
