@@ -340,7 +340,7 @@ var __vue_staticRenderFns__ = [function () {var _vm=this;var _h=_vm.$createEleme
   
 
   
-  var slider = __vue_normalize__(
+  var Slider = __vue_normalize__(
     { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ },
     __vue_inject_styles__,
     __vue_script__,
@@ -548,7 +548,7 @@ var __vue_staticRenderFns__$1 = [];
   
 
   
-  var sliderItem = __vue_normalize__$1(
+  var SliderItem = __vue_normalize__$1(
     { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 },
     __vue_inject_styles__$1,
     __vue_script__$1,
@@ -559,4 +559,12 @@ var __vue_staticRenderFns__$1 = [];
     undefined
   );
 
-export { slider as Slider, sliderItem as SliderItem };
+var VueEasySlider = {
+  install: function install(Vue) {
+    Vue.component(Slider.name, Slider);
+    Vue.component(SliderItem.name, SliderItem);
+  },
+};
+
+export default VueEasySlider;
+export { Slider, SliderItem };
