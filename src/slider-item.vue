@@ -25,11 +25,13 @@ export default {
       zIndex: 99,
     }
   },
+
   created() {
-    this.$parent.init()
+    this.$parent.$emit('slider:init')
     this.speed = this.$parent.speed
     this.animation = this.$parent.animation
   },
+
   methods: {
     init() {
       this.isInit = true

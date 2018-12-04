@@ -119,6 +119,7 @@ export default {
   created() {
     this.init = throttle(this.init, 100)
     this.move = debounce(this.move, this.speed - 200)
+    this.$on('slider:init', this.init)
   },
   mounted() {
     this.init()
