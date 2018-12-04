@@ -18,7 +18,7 @@ Install like plugin:
 
 ```js
 import Vue from 'vue'
-import Slider from 'vue-easy-slider/dist/vue-easy-slider.esm.js'
+import Slider from 'vue-easy-slider/dist/vue-easy-slider.js'
 
 Vue.use(Slider)
 ```
@@ -39,7 +39,7 @@ Or work on a Vue instance:
 ```
 
 ```JavaScript
-import { Slider, SliderItem } from 'vue-easy-slider/dist/vue-easy-slider.esm.js'
+import { Slider, SliderItem } from 'vue-easy-slider/dist/vue-easy-slider.js'
 
 new Vue( {
   el: 'body',
