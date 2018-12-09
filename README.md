@@ -23,7 +23,7 @@ Plugin install:
 
 ```js
 import Vue from 'vue'
-import EasySlider from 'vue-easy-slider'
+import EasySlider from 'vue-easy-slider/dist/vue-easy-slider.esm.js'
 
 Vue.use(EasySlider)
 ```
