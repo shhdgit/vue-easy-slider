@@ -44,7 +44,7 @@ Or work on a Vue instance:
 ```
 
 ```JavaScript
-import { Slider, SliderItem } from 'vue-easy-slider'
+import { Slider, SliderItem } from 'vue-easy-slider/dist/vue-easy-slider.esm.js'
 
 new Vue({
   el: 'body',
