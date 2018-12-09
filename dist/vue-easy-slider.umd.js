@@ -586,112 +586,17 @@
               var __vue_script__ = script;
               
   /* template */
-  var __vue_render__ = function() {
-    var _vm = this;
-    var _h = _vm.$createElement;
-    var _c = _vm._self._c || _h;
-    return _c(
-      "div",
-      { staticClass: "slider", style: { width: _vm.width, height: _vm.height } },
-      [
-        !_vm.sliderItems.length ? _vm._t("loading", [_vm._m(0)]) : _vm._e(),
-        _vm._v(" "),
-        _c(
-          "div",
-          { ref: "touchArea", staticClass: "slider-items" },
-          [_vm._t("default")],
-          2
-        ),
-        _vm._v(" "),
-        _vm.indicators
-          ? _c(
-              "div",
-              {
-                class: "slider-indicators slider-indicators-" + _vm.indicators,
-                on: {
-                  click: function($event) {
-                    $event.stopPropagation();
-                  }
-                }
-              },
-              _vm._l(_vm.sliderItems.length, function(i) {
-                return _c("span", {
-                  key: i,
-                  staticClass: "slider-indicator-icon",
-                  class: {
-                    "slider-indicator-active": _vm.currentIndex === i - 1
-                  },
-                  on: {
-                    click: function($event) {
-                      _vm.handleIndicator(i - _vm.currentIndex - 1);
-                    }
-                  }
-                })
-              })
-            )
-          : _vm._e(),
-        _vm._v(" "),
-        _vm.controlBtn
-          ? [
-              _c(
-                "button",
-                {
-                  staticClass: "slider-btn slider-btn-left",
-                  on: {
-                    click: function($event) {
-                      $event.stopPropagation();
-                      return _vm.prev($event)
-                    }
-                  }
-                },
-                [_c("i", { staticClass: "slider-icon slider-icon-left" })]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass: "slider-btn slider-btn-right",
-                  on: {
-                    click: function($event) {
-                      $event.stopPropagation();
-                      return _vm.next($event)
-                    }
-                  }
-                },
-                [_c("i", { staticClass: "slider-icon slider-icon-right" })]
-              )
-            ]
-          : _vm._e()
-      ],
-      2
-    )
-  };
-  var __vue_staticRenderFns__ = [
-    function() {
-      var _vm = this;
-      var _h = _vm.$createElement;
-      var _c = _vm._self._c || _h;
-      return _c("div", { staticClass: "slider-loading" }, [
-        _c("div", { staticClass: "ball-pulse" }, [
-          _c("div"),
-          _vm._v(" "),
-          _c("div"),
-          _vm._v(" "),
-          _c("div")
-        ])
-      ])
-    }
-  ];
-  __vue_render__._withStripped = true;
+  var __vue_render__ = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"slider",style:({ width: _vm.width, height: _vm.height })},[(!_vm.sliderItems.length)?_vm._t("loading",[_vm._m(0)]):_vm._e(),_vm._v(" "),_c('div',{ref:"touchArea",staticClass:"slider-items"},[_vm._t("default")],2),_vm._v(" "),(_vm.indicators)?_c('div',{class:("slider-indicators slider-indicators-" + _vm.indicators),on:{"click":function($event){$event.stopPropagation();}}},_vm._l((_vm.sliderItems.length),function(i){return _c('span',{key:i,staticClass:"slider-indicator-icon",class:{ 'slider-indicator-active': _vm.currentIndex === i - 1 },on:{"click":function($event){_vm.handleIndicator(i - _vm.currentIndex - 1);}}})})):_vm._e(),_vm._v(" "),(_vm.controlBtn)?[_c('button',{staticClass:"slider-btn slider-btn-left",on:{"click":function($event){$event.stopPropagation();return _vm.prev($event)}}},[_c('i',{staticClass:"slider-icon slider-icon-left"})]),_vm._v(" "),_c('button',{staticClass:"slider-btn slider-btn-right",on:{"click":function($event){$event.stopPropagation();return _vm.next($event)}}},[_c('i',{staticClass:"slider-icon slider-icon-right"})])]:_vm._e()],2)};
+  var __vue_staticRenderFns__ = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"slider-loading"},[_c('div',{staticClass:"ball-pulse"},[_c('div'),_vm._v(" "),_c('div'),_vm._v(" "),_c('div')])])}];
 
     /* style */
     var __vue_inject_styles__ = function (inject) {
       if (!inject) { return }
-      inject("data-v-4119913a_0", { source: "\n.slider[data-v-4119913a] {\n  position: relative;\n  overflow: hidden;\n}\n.slider-items[data-v-4119913a] {\n  width: 100%;\n  height: 100%;\n}\n.slider-btn[data-v-4119913a] {\n  position: absolute;\n  top: 0;\n  z-index: 999;\n  height: 100%;\n  width: 50px;\n  border: none;\n  background: rgba(0,0,0,0.1);\n  outline: none;\n  transition: background 0.3s;\n  cursor: pointer;\n}\n.slider-btn:hover .slider-icon[data-v-4119913a] {\n  border-color: #fff;\n}\n.slider-btn-left[data-v-4119913a] {\n  left: 0;\n  background: linear-gradient(90deg, rgba(0,0,0,0.1), rgba(0,0,0,0));\n}\n.slider-btn-right[data-v-4119913a] {\n  right: 0;\n  background: linear-gradient(-90deg, rgba(0,0,0,0.1), rgba(0,0,0,0));\n}\n.slider-icon[data-v-4119913a] {\n  display: inline-block;\n  width: 15px;\n  height: 15px;\n  border-left: 2px solid rgba(255,255,255,0.6);\n  border-bottom: 2px solid rgba(255,255,255,0.6);\n  transition: border 0.2s;\n}\n.slider-icon-left[data-v-4119913a] {\n  transform: rotate(45deg);\n}\n.slider-icon-right[data-v-4119913a] {\n  transform: rotate(-135deg);\n}\n.slider-indicators[data-v-4119913a] {\n  position: absolute;\n  bottom: 20px;\n  z-index: 999;\n}\n.slider-indicators-center[data-v-4119913a] {\n  left: 50%;\n  transform: translateX(-50%);\n}\n.slider-indicators-left[data-v-4119913a] {\n  left: 6%;\n}\n.slider-indicators-right[data-v-4119913a] {\n  right: 6%;\n}\n.slider-indicator-icon[data-v-4119913a] {\n  display: inline-block;\n  width: 10px;\n  height: 10px;\n  margin: 0 0.1rem;\n  cursor: pointer;\n  border-radius: 50%;\n  background-color: rgba(0,0,0,0.2);\n}\n.slider-indicator-active[data-v-4119913a] {\n  background-color: rgba(255,255,255,0.2);\n}\n.slider-loading[data-v-4119913a] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  z-index: 99;\n  width: 100%;\n  height: 100%;\n  background: rgba(0,0,0,0.1);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.ball-pulse > div[data-v-4119913a]:nth-child(1) {\n  animation: scale-data-v-4119913a 0.75s -0.24s infinite cubic-bezier(0.2, 0.68, 0.18, 1.08);\n}\n.ball-pulse > div[data-v-4119913a]:nth-child(2) {\n  animation: scale-data-v-4119913a 0.75s -0.12s infinite cubic-bezier(0.2, 0.68, 0.18, 1.08);\n}\n.ball-pulse > div[data-v-4119913a]:nth-child(3) {\n  animation: scale-data-v-4119913a 0.75s 0s infinite cubic-bezier(0.2, 0.68, 0.18, 1.08);\n}\n.ball-pulse > div[data-v-4119913a] {\n  background-color: #fff;\n  width: 15px;\n  height: 15px;\n  border-radius: 100%;\n  margin: 2px;\n  animation-fill-mode: both;\n  display: inline-block;\n}\n@-moz-keyframes scale-data-v-4119913a {\n0% {\n    transform: scale(1);\n    opacity: 1;\n}\n45% {\n    transform: scale(0.1);\n    opacity: 0.7;\n}\n80% {\n    transform: scale(1);\n    opacity: 1;\n}\n}\n@-webkit-keyframes scale-data-v-4119913a {\n0% {\n    transform: scale(1);\n    opacity: 1;\n}\n45% {\n    transform: scale(0.1);\n    opacity: 0.7;\n}\n80% {\n    transform: scale(1);\n    opacity: 1;\n}\n}\n@-o-keyframes scale-data-v-4119913a {\n0% {\n    transform: scale(1);\n    opacity: 1;\n}\n45% {\n    transform: scale(0.1);\n    opacity: 0.7;\n}\n80% {\n    transform: scale(1);\n    opacity: 1;\n}\n}\n@keyframes scale-data-v-4119913a {\n0% {\n    transform: scale(1);\n    opacity: 1;\n}\n45% {\n    transform: scale(0.1);\n    opacity: 0.7;\n}\n80% {\n    transform: scale(1);\n    opacity: 1;\n}\n}\n", map: {"version":3,"sources":["/Users/suhaha/Documents/personal/frontend/opensource/vue-easy-slider-refactor/src/slider.vue","slider.vue"],"names":[],"mappings":";AAwOA;EACA,mBAAA;EACA,iBAAA;CCvOC;ADwOD;EACA,YAAA;EACA,aAAA;CCtOC;ADwOD;EACA,mBAAA;EACA,OAAA;EACA,aAAA;EAEA,aAAA;EACA,YAAA;EACA,aAAA;EAEA,4BAAA;EACA,cAAA;EACA,4BAAA;EACA,gBAAA;CCxOC;ADyOD;EACA,mBAAA;CCvOC;ADwOD;EACA,QAAA;EACA,mEAAA;CCtOC;ADuOD;EACA,SAAA;EACA,oEAAA;CCrOC;ADsOD;EACA,sBAAA;EACA,YAAA;EACA,aAAA;EACA,6CAAA;EACA,+CAAA;EAEA,wBAAA;CCrOC;ADsOD;EACA,yBAAA;CCpOC;ADqOD;EACA,2BAAA;CCnOC;ADqOD;EACA,mBAAA;EACA,aAAA;EACA,aAAA;CCnOC;ADoOD;EACA,UAAA;EACA,4BAAA;CClOC;ADmOD;EACA,SAAA;CCjOC;ADkOD;EACA,UAAA;CChOC;ADiOD;EACA,sBAAA;EACA,YAAA;EACA,aAAA;EACA,iBAAA;EAEA,gBAAA;EACA,mBAAA;EACA,kCAAA;CChOC;ADiOD;EACA,wCAAA;CC/NC;ADiOD;EACA,mBAAA;EACA,OAAA;EACA,QAAA;EACA,YAAA;EACA,YAAA;EACA,aAAA;EACA,4BAAA;EACA,cAAA;EACA,wBAAA;EACA,oBAAA;CC/NC;ADkOD;EACA,2FAAA;CChOC;ADiOD;EACA,2FAAA;CC/NC;ADgOD;EACA,uFAAA;CC9NC;AD+ND;EACA,uBAAA;EACA,YAAA;EACA,aAAA;EACA,oBAAA;EACA,YAAA;EACA,0BAAA;EACA,sBAAA;CC7NC;AD+ND;AACA;IACA,oBAAA;IACA,WAAA;CC7NG;AD8NH;IACA,sBAAA;IACA,aAAA;CC5NG;AD6NH;IACA,oBAAA;IACA,WAAA;CC3NG;CACF;ADiND;AACA;IACA,oBAAA;IACA,WAAA;CC/MG;ADgNH;IACA,sBAAA;IACA,aAAA;CC9MG;AD+MH;IACA,oBAAA;IACA,WAAA;CC7MG;CACF;ADmMD;AACA;IACA,oBAAA;IACA,WAAA;CCjMG;ADkMH;IACA,sBAAA;IACA,aAAA;CChMG;ADiMH;IACA,oBAAA;IACA,WAAA;CC/LG;CACF;ADqLD;AACA;IACA,oBAAA;IACA,WAAA;CCnLG;ADoLH;IACA,sBAAA;IACA,aAAA;CClLG;ADmLH;IACA,oBAAA;IACA,WAAA;CCjLG;CACF","file":"slider.vue","sourcesContent":[null,".slider {\n  position: relative;\n  overflow: hidden;\n}\n.slider-items {\n  width: 100%;\n  height: 100%;\n}\n.slider-btn {\n  position: absolute;\n  top: 0;\n  z-index: 999;\n  height: 100%;\n  width: 50px;\n  border: none;\n  background: rgba(0,0,0,0.1);\n  outline: none;\n  transition: background 0.3s;\n  cursor: pointer;\n}\n.slider-btn:hover .slider-icon {\n  border-color: #fff;\n}\n.slider-btn-left {\n  left: 0;\n  background: linear-gradient(90deg, rgba(0,0,0,0.1), rgba(0,0,0,0));\n}\n.slider-btn-right {\n  right: 0;\n  background: linear-gradient(-90deg, rgba(0,0,0,0.1), rgba(0,0,0,0));\n}\n.slider-icon {\n  display: inline-block;\n  width: 15px;\n  height: 15px;\n  border-left: 2px solid rgba(255,255,255,0.6);\n  border-bottom: 2px solid rgba(255,255,255,0.6);\n  transition: border 0.2s;\n}\n.slider-icon-left {\n  transform: rotate(45deg);\n}\n.slider-icon-right {\n  transform: rotate(-135deg);\n}\n.slider-indicators {\n  position: absolute;\n  bottom: 20px;\n  z-index: 999;\n}\n.slider-indicators-center {\n  left: 50%;\n  transform: translateX(-50%);\n}\n.slider-indicators-left {\n  left: 6%;\n}\n.slider-indicators-right {\n  right: 6%;\n}\n.slider-indicator-icon {\n  display: inline-block;\n  width: 10px;\n  height: 10px;\n  margin: 0 0.1rem;\n  cursor: pointer;\n  border-radius: 50%;\n  background-color: rgba(0,0,0,0.2);\n}\n.slider-indicator-active {\n  background-color: rgba(255,255,255,0.2);\n}\n.slider-loading {\n  position: absolute;\n  top: 0;\n  left: 0;\n  z-index: 99;\n  width: 100%;\n  height: 100%;\n  background: rgba(0,0,0,0.1);\n  display: flex;\n  justify-content: center;\n  align-items: center;\n}\n.ball-pulse > div:nth-child(1) {\n  animation: scale 0.75s -0.24s infinite cubic-bezier(0.2, 0.68, 0.18, 1.08);\n}\n.ball-pulse > div:nth-child(2) {\n  animation: scale 0.75s -0.12s infinite cubic-bezier(0.2, 0.68, 0.18, 1.08);\n}\n.ball-pulse > div:nth-child(3) {\n  animation: scale 0.75s 0s infinite cubic-bezier(0.2, 0.68, 0.18, 1.08);\n}\n.ball-pulse > div {\n  background-color: #fff;\n  width: 15px;\n  height: 15px;\n  border-radius: 100%;\n  margin: 2px;\n  animation-fill-mode: both;\n  display: inline-block;\n}\n@-moz-keyframes scale {\n  0% {\n    transform: scale(1);\n    opacity: 1;\n  }\n  45% {\n    transform: scale(0.1);\n    opacity: 0.7;\n  }\n  80% {\n    transform: scale(1);\n    opacity: 1;\n  }\n}\n@-webkit-keyframes scale {\n  0% {\n    transform: scale(1);\n    opacity: 1;\n  }\n  45% {\n    transform: scale(0.1);\n    opacity: 0.7;\n  }\n  80% {\n    transform: scale(1);\n    opacity: 1;\n  }\n}\n@-o-keyframes scale {\n  0% {\n    transform: scale(1);\n    opacity: 1;\n  }\n  45% {\n    transform: scale(0.1);\n    opacity: 0.7;\n  }\n  80% {\n    transform: scale(1);\n    opacity: 1;\n  }\n}\n@keyframes scale {\n  0% {\n    transform: scale(1);\n    opacity: 1;\n  }\n  45% {\n    transform: scale(0.1);\n    opacity: 0.7;\n  }\n  80% {\n    transform: scale(1);\n    opacity: 1;\n  }\n}\n"]}, media: undefined });
+      inject("data-v-d5c2db1a_0", { source: "\n.slider[data-v-d5c2db1a]{position:relative;overflow:hidden\n}\n.slider-items[data-v-d5c2db1a]{width:100%;height:100%\n}\n.slider-btn[data-v-d5c2db1a]{position:absolute;top:0;z-index:999;height:100%;width:50px;border:none;background:rgba(0,0,0,.1);outline:0;transition:background .3s;cursor:pointer\n}\n.slider-btn:hover .slider-icon[data-v-d5c2db1a]{border-color:#fff\n}\n.slider-btn-left[data-v-d5c2db1a]{left:0;background:linear-gradient(90deg,rgba(0,0,0,.1),rgba(0,0,0,0))\n}\n.slider-btn-right[data-v-d5c2db1a]{right:0;background:linear-gradient(-90deg,rgba(0,0,0,.1),rgba(0,0,0,0))\n}\n.slider-icon[data-v-d5c2db1a]{display:inline-block;width:15px;height:15px;border-left:2px solid rgba(255,255,255,.6);border-bottom:2px solid rgba(255,255,255,.6);transition:border .2s\n}\n.slider-icon-left[data-v-d5c2db1a]{transform:rotate(45deg)\n}\n.slider-icon-right[data-v-d5c2db1a]{transform:rotate(-135deg)\n}\n.slider-indicators[data-v-d5c2db1a]{position:absolute;bottom:20px;z-index:999\n}\n.slider-indicators-center[data-v-d5c2db1a]{left:50%;transform:translateX(-50%)\n}\n.slider-indicators-left[data-v-d5c2db1a]{left:6%\n}\n.slider-indicators-right[data-v-d5c2db1a]{right:6%\n}\n.slider-indicator-icon[data-v-d5c2db1a]{display:inline-block;width:10px;height:10px;margin:0 .1rem;cursor:pointer;border-radius:50%;background-color:rgba(0,0,0,.2)\n}\n.slider-indicator-active[data-v-d5c2db1a]{background-color:rgba(255,255,255,.2)\n}\n.slider-loading[data-v-d5c2db1a]{position:absolute;top:0;left:0;z-index:99;width:100%;height:100%;background:rgba(0,0,0,.1);display:flex;justify-content:center;align-items:center\n}\n.ball-pulse>div[data-v-d5c2db1a]:nth-child(1){animation:scale-data-v-d5c2db1a .75s -.24s infinite cubic-bezier(.2,.68,.18,1.08)\n}\n.ball-pulse>div[data-v-d5c2db1a]:nth-child(2){animation:scale-data-v-d5c2db1a .75s -.12s infinite cubic-bezier(.2,.68,.18,1.08)\n}\n.ball-pulse>div[data-v-d5c2db1a]:nth-child(3){animation:scale-data-v-d5c2db1a .75s 0s infinite cubic-bezier(.2,.68,.18,1.08)\n}\n.ball-pulse>div[data-v-d5c2db1a]{background-color:#fff;width:15px;height:15px;border-radius:100%;margin:2px;animation-fill-mode:both;display:inline-block\n}\n@-moz-keyframes scale-data-v-d5c2db1a{\n0%{transform:scale(1);opacity:1\n}\n45%{transform:scale(.1);opacity:.7\n}\n80%{transform:scale(1);opacity:1\n}\n}\n@-webkit-keyframes scale-data-v-d5c2db1a{\n0%{transform:scale(1);opacity:1\n}\n45%{transform:scale(.1);opacity:.7\n}\n80%{transform:scale(1);opacity:1\n}\n}\n@-o-keyframes scale-data-v-d5c2db1a{\n0%{transform:scale(1);opacity:1\n}\n45%{transform:scale(.1);opacity:.7\n}\n80%{transform:scale(1);opacity:1\n}\n}\n@keyframes scale-data-v-d5c2db1a{\n0%{transform:scale(1);opacity:1\n}\n45%{transform:scale(.1);opacity:.7\n}\n80%{transform:scale(1);opacity:1\n}\n}", map: undefined, media: undefined });
 
     };
     /* scoped */
-    var __vue_scope_id__ = "data-v-4119913a";
+    var __vue_scope_id__ = "data-v-d5c2db1a";
     /* module identifier */
     var __vue_module_identifier__ = undefined;
     /* functional template */
@@ -705,7 +610,7 @@
       var component = (typeof script$$1 === 'function' ? script$$1.options : script$$1) || {};
 
       // For security concerns, we use only base name in production mode.
-      component.__file = "/Users/suhaha/Documents/personal/frontend/opensource/vue-easy-slider-refactor/src/slider.vue";
+      component.__file = "slider.vue";
 
       if (!component.render) {
         component.render = template.render;
@@ -762,6 +667,17 @@
           var index = style.ids.length;
 
           style.ids.push(id);
+
+          if (css.map) {
+            // https://developer.chrome.com/devtools/docs/javascript-debugging
+            // this makes source maps inside style tags work properly in Chrome
+            code += '\n/*# sourceURL=' + css.map.sources[0] + ' */';
+            // http://stackoverflow.com/a/26603875
+            code +=
+              '\n/*# sourceMappingURL=data:application/json;base64,' +
+              btoa(unescape(encodeURIComponent(JSON.stringify(css.map)))) +
+              ' */';
+          }
 
           if (isOldIE) {
             style.element = style.element || document.querySelector('style[data-group=' + group + ']');
@@ -879,56 +795,17 @@
               var __vue_script__$1 = script$1;
               
   /* template */
-  var __vue_render__$1 = function() {
-    var _vm = this;
-    var _h = _vm.$createElement;
-    var _c = _vm._self._c || _h;
-    return _c(
-      "transition",
-      {
-        attrs: {
-          name: _vm.isInit
-            ? ""
-            : _vm.animation + "-" + (_vm.direction ? "left" : "right")
-        }
-      },
-      [
-        _vm.display
-          ? _c(
-              "div",
-              _vm._g(
-                _vm._b(
-                  {
-                    staticClass: "slider-item",
-                    style: {
-                      zIndex: _vm.zIndex,
-                      transition: "all " + _vm.speed / 1000 + "s"
-                    }
-                  },
-                  "div",
-                  _vm.$attrs,
-                  false
-                ),
-                _vm.$listeners
-              ),
-              [_vm._t("default")],
-              2
-            )
-          : _vm._e()
-      ]
-    )
-  };
+  var __vue_render__$1 = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('transition',{attrs:{"name":_vm.isInit ? '' : (_vm.animation + "-" + (_vm.direction ? 'left' : 'right'))}},[(_vm.display)?_c('div',_vm._g(_vm._b({staticClass:"slider-item",style:({ zIndex: _vm.zIndex, transition: ("all " + (_vm.speed / 1000) + "s") })},'div',_vm.$attrs,false),_vm.$listeners),[_vm._t("default")],2):_vm._e()])};
   var __vue_staticRenderFns__$1 = [];
-  __vue_render__$1._withStripped = true;
 
     /* style */
     var __vue_inject_styles__$1 = function (inject) {
       if (!inject) { return }
-      inject("data-v-4670f2a9_0", { source: "\n.slider-item[data-v-4670f2a9] {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n}\n.normal-right-enter[data-v-4670f2a9],\n.normal-left-leave-to[data-v-4670f2a9] {\n  transform: translateX(-100%);\n}\n.normal-left-enter[data-v-4670f2a9],\n.normal-right-leave-to[data-v-4670f2a9] {\n  transform: translateX(100%);\n}\n.fade-left-enter[data-v-4670f2a9],\n.fade-right-enter[data-v-4670f2a9],\n.fade-left-leave-to[data-v-4670f2a9],\n.fade-right-leave-to[data-v-4670f2a9] {\n  opacity: 0;\n}\n.fade-right-enter[data-v-4670f2a9],\n.fade-left-leave-to[data-v-4670f2a9] {\n  transform: translateX(-10px);\n}\n.fade-left-enter[data-v-4670f2a9],\n.fade-right-leave-to[data-v-4670f2a9] {\n  transform: translateX(10px);\n}\n", map: {"version":3,"sources":["/Users/suhaha/Documents/personal/frontend/opensource/vue-easy-slider-refactor/src/slider-item.vue","slider-item.vue"],"names":[],"mappings":";AAwDA;EACA,mBAAA;EACA,OAAA;EACA,QAAA;EAEA,YAAA;EACA,aAAA;CCxDC;ADyDD;;EAEA,6BAAA;CCvDC;ADwDD;;EAEA,4BAAA;CCtDC;ADuDD;;;;EAIA,WAAA;CCrDC;ADsDD;;EAEA,6BAAA;CCpDC;ADqDD;;EAEA,4BAAA;CCnDC","file":"slider-item.vue","sourcesContent":[null,".slider-item {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n}\n.normal-right-enter,\n.normal-left-leave-to {\n  transform: translateX(-100%);\n}\n.normal-left-enter,\n.normal-right-leave-to {\n  transform: translateX(100%);\n}\n.fade-left-enter,\n.fade-right-enter,\n.fade-left-leave-to,\n.fade-right-leave-to {\n  opacity: 0;\n}\n.fade-right-enter,\n.fade-left-leave-to {\n  transform: translateX(-10px);\n}\n.fade-left-enter,\n.fade-right-leave-to {\n  transform: translateX(10px);\n}\n"]}, media: undefined });
+      inject("data-v-4393fdb9_0", { source: "\n.slider-item[data-v-4393fdb9]{position:absolute;top:0;left:0;width:100%;height:100%\n}\n.normal-left-leave-to[data-v-4393fdb9],.normal-right-enter[data-v-4393fdb9]{transform:translateX(-100%)\n}\n.normal-left-enter[data-v-4393fdb9],.normal-right-leave-to[data-v-4393fdb9]{transform:translateX(100%)\n}\n.fade-left-enter[data-v-4393fdb9],.fade-left-leave-to[data-v-4393fdb9],.fade-right-enter[data-v-4393fdb9],.fade-right-leave-to[data-v-4393fdb9]{opacity:0\n}\n.fade-left-leave-to[data-v-4393fdb9],.fade-right-enter[data-v-4393fdb9]{transform:translateX(-10px)\n}\n.fade-left-enter[data-v-4393fdb9],.fade-right-leave-to[data-v-4393fdb9]{transform:translateX(10px)\n}", map: undefined, media: undefined });
 
     };
     /* scoped */
-    var __vue_scope_id__$1 = "data-v-4670f2a9";
+    var __vue_scope_id__$1 = "data-v-4393fdb9";
     /* module identifier */
     var __vue_module_identifier__$1 = undefined;
     /* functional template */
@@ -942,7 +819,7 @@
       var component = (typeof script === 'function' ? script.options : script) || {};
 
       // For security concerns, we use only base name in production mode.
-      component.__file = "/Users/suhaha/Documents/personal/frontend/opensource/vue-easy-slider-refactor/src/slider-item.vue";
+      component.__file = "slider-item.vue";
 
       if (!component.render) {
         component.render = template.render;
@@ -1000,6 +877,17 @@
 
           style.ids.push(id);
 
+          if (css.map) {
+            // https://developer.chrome.com/devtools/docs/javascript-debugging
+            // this makes source maps inside style tags work properly in Chrome
+            code += '\n/*# sourceURL=' + css.map.sources[0] + ' */';
+            // http://stackoverflow.com/a/26603875
+            code +=
+              '\n/*# sourceMappingURL=data:application/json;base64,' +
+              btoa(unescape(encodeURIComponent(JSON.stringify(css.map)))) +
+              ' */';
+          }
+
           if (isOldIE) {
             style.element = style.element || document.querySelector('style[data-group=' + group + ']');
           }
@@ -1054,7 +942,7 @@
 
   var plugin = {
     // eslint-disable-next-line no-undef
-    version: "5.2.4",
+    version: "5.2.5",
     install: function install(Vue) {
       Vue.component(Slider.name, Slider);
       Vue.component(SliderItem.name, SliderItem);
