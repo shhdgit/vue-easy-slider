@@ -23,9 +23,9 @@ Plugin install:
 
 ```js
 import Vue from 'vue'
-import { SliderPlugin } from 'vue-easy-slider/dist/index.js'
+import EasySlider from 'vue-easy-slider'
 
-Vue.use(SliderPlugin)
+Vue.use(EasySlider)
 ```
 
 Or work on a Vue instance:
@@ -44,7 +44,7 @@ Or work on a Vue instance:
 ```
 
 ```JavaScript
-import { Slider, SliderItem } from 'vue-easy-slider/dist/index.js'
+import { Slider, SliderItem } from 'vue-easy-slider'
 
 new Vue({
   el: 'body',

@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import flushPromises from 'flush-promises'
 
-import { Slider, SliderItem } from '../src'
+import { Slider, SliderItem } from '../dist/vue-easy-slider.esm'
 
 describe('Slider', () => {
   describe('has hook', () => {

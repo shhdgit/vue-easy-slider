@@ -1,6 +1,6 @@
 {
   "name": "vue-easy-slider",
-  "version": "5.2.4",
+  "version": "5.2.5",
   "description": "vue-easy-slider is a slider component of Vue.js.",
   "keywords": [
     "slide",
@@ -18,8 +18,8 @@
     "url": "git@github.com:shhdgit/vue-easy-slider.git"
   },
   "license": "MIT",
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
+  "main": "dist/vue-easy-slider.umd.js",
+  "module": "dist/vue-easy-slider.esm.js",
   "browser": "dist/vue-easy-slider.min.js",
   "unpkg": "dist/vue-easy-slider.min.js",
   "jsdelivr": "dist/vue-easy-slider.min.js",
@@ -29,8 +29,11 @@
     "types/*.d.ts"
   ],
   "scripts": {
-    "build": "cross-env NODE_ENV=production rollup -c",
-    "dev": "cross-env NODE_ENV=development rollup -c -w",
+    "build": "npm run build:browser && npm run build:es && npm run build:umd",
+    "build:browser": "rollup --config build/rollup.config.browser.js",
+    "build:es": "rollup --config build/rollup.config.esm.js",
+    "build:umd": "rollup --config build/rollup.config.umd.js",
+    "dev": "cross-env NODE_ENV=development rollup --config build/rollup.config.browser.js --watch",
     "test": "jest"
   },
   "devDependencies": {
@@ -46,6 +49,7 @@
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-eslint": "^5.0.0",
     "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-replace": "^2.1.0",
     "rollup-plugin-uglify": "^6.0.0",
     "rollup-plugin-vue": "^4.3.2",
     "stylus": "^0.54.5",

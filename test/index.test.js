@@ -1,6 +1,6 @@
 import { createLocalVue } from '@vue/test-utils'
 
-import { Slider, SliderItem, SliderPlugin } from '../src'
+import EasySlider, { Slider, SliderItem } from '../dist/vue-easy-slider.esm'
 
 describe('Component name', () => {
   test('is Slider', () => {
@@ -16,6 +16,6 @@ describe('Plugin', () => {
   test('can install', () => {
     const localVue = createLocalVue()
 
-    localVue.use(SliderPlugin)
+    localVue.use(EasySlider)
   })
 })
