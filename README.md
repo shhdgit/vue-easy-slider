@@ -1,9 +1,9 @@
-# vue-easy-slide
+# vue-easy-slider
 
-[![Travis branch](https://img.shields.io/travis/com/shhdgit/vue-easy-slide.svg?style=flat-square)](https://travis-ci.com/shhdgit/vue-easy-slide)
-[![NPM package](https://img.shields.io/npm/v/vue-easy-slide.svg?style=flat-square)](https://www.npmjs.org/package/vue-easy-slide)
-[![NPM downloads](http://img.shields.io/npm/dm/vue-easy-slide.svg?style=flat-square)](https://npmjs.org/package/vue-easy-slide)
-[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/shhdgit/vue-easy-slide/blob/master/LICENCE)
+[![Travis branch](https://img.shields.io/travis/com/shhdgit/vue-easy-slider.svg?style=flat-square)](https://travis-ci.com/shhdgit/vue-easy-slider)
+[![NPM package](https://img.shields.io/npm/v/vue-easy-slider.svg?style=flat-square)](https://www.npmjs.org/package/vue-easy-slider)
+[![NPM downloads](http://img.shields.io/npm/dm/vue-easy-slider.svg?style=flat-square)](https://npmjs.org/package/vue-easy-slider)
+[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/shhdgit/vue-easy-slider/blob/master/LICENCE)
 
 Keep slider simple!
 
@@ -14,7 +14,7 @@ Keep slider simple!
 ## Install
 
 ```bash
-npm i -S vue-easy-slide
+npm i -S vue-easy-slider
 ```
 
 ## Usage
@@ -23,7 +23,7 @@ Plugin install:
 
 ```js
 import Vue from 'vue'
-import EasySlider from 'vue-easy-slide/dist/vue-easy-slide.esm.js'
+import EasySlider from 'vue-easy-slider'
 
 Vue.use(EasySlider)
 ```
@@ -44,7 +44,7 @@ Or work on a Vue instance:
 ```
 
 ```JavaScript
-import { Slider, SliderItem } from 'vue-easy-slide/dist/vue-easy-slide.esm.js'
+import { Slider, SliderItem } from 'vue-easy-slider'
 
 new Vue({
   el: 'body',

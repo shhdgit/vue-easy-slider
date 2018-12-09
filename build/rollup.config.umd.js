@@ -4,7 +4,7 @@ import pkg from '../package.json'
 const config = Object.assign({}, base, {
   output: {
     exports: 'named',
-    name: 'vue-easy-slide',
+    name: 'vue-easy-slider',
     file: pkg.main,
     format: 'umd',
   },

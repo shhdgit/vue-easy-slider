@@ -1,6 +1,6 @@
 import { createLocalVue } from '@vue/test-utils'
 
-import EasySlider, { Slider, SliderItem } from '../dist/vue-easy-slide.esm'
+import EasySlider, { Slider, SliderItem } from '../dist/vue-easy-slider.esm'
 
 describe('Component name', () => {
   test('is Slider', () => {

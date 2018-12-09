@@ -1,7 +1,7 @@
 {
-  "name": "vue-easy-slide",
-  "version": "1.0.1",
-  "description": "vue-easy-slide is a slider component of Vue.js.",
+  "name": "vue-easy-slider",
+  "version": "5.2.7",
+  "description": "vue-easy-slider is a slider component of Vue.js.",
   "keywords": [
     "slide",
     "swipe",
@@ -11,18 +11,17 @@
     "vue-slider",
     "vue-component"
   ],
-  "homepage": "https://github.com/shhdgit/vue-easy-slide",
+  "homepage": "https://github.com/shhdgit/vue-easy-slider",
   "author": "Suhaha < jklopsdfw@gmail.com >",
   "repository": {
     "type": "git",
-    "url": "git@github.com:shhdgit/vue-easy-slide.git"
+    "url": "git@github.com:shhdgit/vue-easy-slider.git"
   },
   "license": "MIT",
-  "main": "dist/vue-easy-slide.umd.js",
-  "module": "dist/vue-easy-slide.esm.js",
-  "browser": "dist/vue-easy-slide.min.js",
-  "unpkg": "dist/vue-easy-slide.min.js",
-  "jsdelivr": "dist/vue-easy-slide.min.js",
+  "main": "dist/vue-easy-slider.umd.js",
+  "module": "dist/vue-easy-slider.esm.js",
+  "unpkg": "dist/vue-easy-slider.min.js",
+  "jsdelivr": "dist/vue-easy-slider.min.js",
   "files": [
     "src",
     "dist/*.js",

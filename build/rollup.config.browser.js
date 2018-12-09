@@ -8,7 +8,7 @@ const config = Object.assign({}, base, {
   output: {
     exports: 'named',
     name: 'VueEasySlider',
-    file: pkg.browser,
+    file: pkg.unpkg,
     format: 'iife',
   },
 })

@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (factory((global['vue-easy-slide'] = {})));
+  (factory((global['vue-easy-slider'] = {})));
 }(this, (function (exports) { 'use strict';
 
   function throttle(fn, delay, mustRunDelay) {
@@ -942,7 +942,7 @@
 
   var plugin = {
     // eslint-disable-next-line no-undef
-    version: "5.2.6",
+    version: "5.2.7",
     install: function install(Vue) {
       Vue.component(Slider.name, Slider);
       Vue.component(SliderItem.name, SliderItem);
