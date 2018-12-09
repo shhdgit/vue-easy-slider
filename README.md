@@ -2,7 +2,7 @@
 
 [![Travis branch](https://img.shields.io/travis/com/shhdgit/vue-easy-slide.svg?style=flat-square)](https://travis-ci.com/shhdgit/vue-easy-slide)
 [![NPM package](https://img.shields.io/npm/v/vue-easy-slide.svg?style=flat-square)](https://www.npmjs.org/package/vue-easy-slide)
-[![NPM downloads](http://img.shields.io/npm/dw/vue-easy-slide.svg?style=flat-square)](https://npmjs.org/package/vue-easy-slide)
+[![NPM downloads](http://img.shields.io/npm/dm/vue-easy-slide.svg?style=flat-square)](https://npmjs.org/package/vue-easy-slide)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/shhdgit/vue-easy-slide/blob/master/LICENCE)
 
 Keep slider simple!
