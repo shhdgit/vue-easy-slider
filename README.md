@@ -1,6 +1,7 @@
 # vue-easy-slider
 
 [![Travis branch](https://img.shields.io/travis/com/shhdgit/vue-easy-slider.svg?style=flat-square)](https://travis-ci.com/shhdgit/vue-easy-slider)
+[![prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://prettier.io/)
 [![NPM package](https://img.shields.io/npm/v/vue-easy-slider.svg?style=flat-square)](https://www.npmjs.org/package/vue-easy-slider)
 [![NPM downloads](http://img.shields.io/npm/dm/vue-easy-slider.svg?style=flat-square)](https://npmjs.org/package/vue-easy-slider)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/shhdgit/vue-easy-slider/blob/master/LICENCE)
