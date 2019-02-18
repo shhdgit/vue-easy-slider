@@ -22,6 +22,7 @@
   "module": "dist/vue-easy-slider.esm.js",
   "unpkg": "dist/vue-easy-slider.min.js",
   "jsdelivr": "dist/vue-easy-slider.min.js",
+  "typings": "types/index.d.ts",
   "files": [
     "src",
     "dist/*.js",
