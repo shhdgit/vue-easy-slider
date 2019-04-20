@@ -195,7 +195,7 @@ export default {
       this.handleControlBtn('previous')
     },
     next() {
-      if (!this.beforePrevious()) return
+      if (!this.beforeNext()) return
 
       this.handleControlBtn('next')
     },
