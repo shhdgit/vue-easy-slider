@@ -942,7 +942,7 @@
 
   var plugin = {
     // eslint-disable-next-line no-undef
-    version: "5.2.7",
+    version: "5.2.8",
     install: function install(Vue) {
       Vue.component(Slider.name, Slider);
       Vue.component(SliderItem.name, SliderItem);

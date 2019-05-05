@@ -80,7 +80,7 @@ export default {
       default: 500,
     },
     indicators: {
-      type: String,
+      type: [String, Boolean],
       default: 'center',
     },
     controlBtn: {
