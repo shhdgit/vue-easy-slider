@@ -1,20 +1,25 @@
 <template>
-  <div :style="{ width: width, height: height }" class="slider">
+  <div
+    :style="{ width: width, height: height }"
+    class="slider"
+    @mouseenter="handleMouseenter"
+    @mouseleave="handleMouseleave"
+  >
     <slot v-if="!sliderItems.length" name="loading">
       <div class="slider-loading">
         <div class="ball-pulse">
-          <div/>
-          <div/>
-          <div/>
+          <div />
+          <div />
+          <div />
         </div>
       </div>
     </slot>
     <div ref="touchArea" class="slider-items">
-      <slot/>
+      <slot />
     </div>
     <div
       v-if="indicators"
-      :class="`slider-indicators slider-indicators-${ indicators }`"
+      :class="`slider-indicators slider-indicators-${indicators}`"
       @click.stop
     >
       <span
@@ -27,10 +32,10 @@
     </div>
     <template v-if="controlBtn">
       <button class="slider-btn slider-btn-left" @click.stop="prev">
-        <i class="slider-icon slider-icon-left"/>
+        <i class="slider-icon slider-icon-left" />
       </button>
       <button class="slider-btn slider-btn-right" @click.stop="next">
-        <i class="slider-icon slider-icon-right"/>
+        <i class="slider-icon slider-icon-right" />
       </button>
     </template>
   </div>
@@ -71,6 +76,10 @@ export default {
       type: Boolean,
       default: true,
     },
+    stopOnHover: {
+      type: Boolean,
+      default: false,
+    },
     interval: {
       type: Number,
       default: 3000,
@@ -102,6 +111,7 @@ export default {
       currentIndex: 0,
       timer: 0,
       af: null,
+      isStopped: false,
     }
   },
 
@@ -152,7 +162,6 @@ export default {
       const currentItem = this.sliderItems[this.currentIndex]
 
       if (!currentItem) return
-
       currentItem.init()
       this.auto()
     },
@@ -168,7 +177,7 @@ export default {
       })
     },
     auto() {
-      if (!this.autoplay || this.sliderItems.length < 2) return
+      if (!this.autoplay || this.isStopped) return
 
       if (this.timer) clearInterval(this.timer)
       this.timer = setInterval(() => {
@@ -176,7 +185,7 @@ export default {
       }, this.interval)
     },
     move(step) {
-      if (!step) return
+      if (!step || !this.canMove()) return
 
       // direction: left: true, right: false
       const direction = step > 0
@@ -200,7 +209,7 @@ export default {
       this.handleControlBtn('next')
     },
     handleIndicator(step) {
-      if (this.sliderItems.length < 2 || !step) return
+      if (!step || !this.canMove()) return
 
       this.move(step)
       this.auto()
@@ -209,7 +218,7 @@ export default {
      * @param direction 'previous' | 'next'
      */
     handleControlBtn(direction) {
-      if (this.sliderItems.length < 2) return
+      if (!this.canMove()) return
 
       const step = direction === 'next' ? 1 : -1
       const nextIndex = this.getNextIndex(step)
@@ -223,7 +232,25 @@ export default {
     },
     getNextIndex(step) {
       const slidersLen = this.sliderItems.length
+      if (!this.sliderItems[this.currentIndex]) {
+        this.currentIndex = slidersLen - 1
+      }
       return (this.currentIndex + step + slidersLen) % slidersLen
+    },
+    canMove() {
+      return this.sliderItems.length > 1
+    },
+    handleMouseenter() {
+      if (this.autoplay && this.stopOnHover) {
+        this.isStopped = true
+        if (this.timer) clearInterval(this.timer)
+      }
+    },
+    handleMouseleave() {
+      if (this.autoplay && this.stopOnHover) {
+        this.isStopped = false
+        this.auto()
+      }
     },
   },
 }

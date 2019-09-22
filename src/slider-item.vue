@@ -1,13 +1,15 @@
 <template>
-  <transition :name="isInit ? '' : `${animation}-${direction ? 'left' : 'right'}`">
+  <transition
+    :name="initAnimation ? '' : `${animation}-${direction ? 'left' : 'right'}`"
+  >
     <div
-      v-if="display"
+      v-show="display"
       v-bind="$attrs"
       :style="{ zIndex: zIndex, transition: `all ${speed / 1000}s` }"
       class="slider-item"
       v-on="$listeners"
     >
-      <slot/>
+      <slot />
     </div>
   </transition>
 </template>
@@ -19,6 +21,7 @@ export default {
     return {
       display: false,
       isInit: false,
+      initAnimation: false,
       direction: false,
       animation: 'normal',
       speed: 500,
@@ -28,15 +31,24 @@ export default {
 
   created() {
     this.$parent.$emit('slider:init')
-    this.speed = this.$parent.speed
-    this.animation = this.$parent.animation
+    this.speed = this.$parent.speed || 500
+    this.animation = this.$parent.animation || 'normal'
+  },
+
+  destroyed() {
+    this.$parent.$emit('slider:init')
   },
 
   methods: {
     init() {
+      if (this.isInit) {
+        return
+      }
+
       this.isInit = true
       this.display = true
-      this.$nextTick(() => (this.isInit = false))
+      this.initAnimation = true
+      this.$nextTick(() => (this.initAnimation = false))
     },
     // direction: left: true, right: false
     show(direction) {

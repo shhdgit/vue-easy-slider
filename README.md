@@ -110,6 +110,7 @@ Slider：
 | touch           | Boolean                          | true       | Enable touch slide                                                     |
 | animation       | 'normal', 'fade'                 | 'normal'   | Change animation                                                       |
 | autoplay        | Boolean                          | true       | Autoplay                                                               |
+| stopOnHover     | Boolean                          | false      | Stop autoplay when hover                                                               |
 | interval        | Number                           | 3000       | Delay of autoplay ( autoplay option should be true )                   |
 | speed           | Number                           | 500        | Speed(ms) of animation                                                 |
 | indicators      | 'center', 'left', 'right', false | 'center'   | Show indicators on option position or hide indicators                  |
