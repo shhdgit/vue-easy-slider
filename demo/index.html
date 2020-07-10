@@ -7,13 +7,21 @@
       p {
         margin: 0;
       }
+      .btn-left {
+        left: 0;
+        background: inherit !important;
+      }
+      .btn-right {
+        right: 0;
+        background: inherit !important;
+      }
     </style>
   </head>
 
   <body>
     <div id="slider">
       {{ testv }}
-      <slider animation="fade" v-model="testv" :speed="1000">
+      <slider animation="fade" v-model="testv" :speed="1000" :btn-contro-left-style="['btn-left']" :btn-control-right-style="['btn-right']">
         <slider-item
           v-for="(i, index) in list"
           :key="index"

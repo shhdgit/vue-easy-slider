@@ -31,10 +31,10 @@
       />
     </div>
     <template v-if="controlBtn">
-      <button class="slider-btn slider-btn-left" @click.stop="prev">
+      <button :class="[...btnControlStyle, ...btnControlLeftStyle]" @click.stop="prev">
         <i class="slider-icon slider-icon-left" />
       </button>
-      <button class="slider-btn slider-btn-right" @click.stop="next">
+      <button :class="[...btnControlStyle, ...btnControlRightStyle]" @click.stop="next">
         <i class="slider-icon slider-icon-right" />
       </button>
     </template>
@@ -104,6 +104,30 @@ export default {
       type: Function,
       default: () => true,
     },
+    btnControlStyle: {
+      type: Array,
+      default: () => ["slider-btn"]
+    },
+    btnControlLeftStyle: {
+      type: Array,
+      default: () => ["slider-btn-left"]
+    },
+    btnControlRightStyle: {
+      type: Array,
+      default: () => ["slider-btn-right"]
+    },
+    btnControlIconStyle: {
+      type: Array,
+      default: () => ["slider-icon"]
+    },
+    btnControlLeftIconStyle: {
+      type: Array,
+      default: () => ["slider-icon-left"]
+    },
+    btnControlRightIconStyle: {
+      type: Array,
+      default: () => ["slider-icon-right"]
+    }
   },
   data() {
     return {
@@ -132,6 +156,7 @@ export default {
     this.$on('slider:init', this.init)
   },
   mounted() {
+    // console.log(">>>", this.props.btnControlLeftStyle)
     this.init()
     this.initTouchArea()
   },
