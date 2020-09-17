@@ -31,11 +31,11 @@
       />
     </div>
     <template v-if="controlBtn">
-      <button class="slider-btn slider-btn-left" @click.stop="prev">
-        <i class="slider-icon slider-icon-left" />
+      <button class="slider-btn slider-btn-left" :aria-label="prevBtnLabel" @click.stop="prev">
+        <i class="slider-icon slider-icon-left" aria-hidden="true"/>
       </button>
-      <button class="slider-btn slider-btn-right" @click.stop="next">
-        <i class="slider-icon slider-icon-right" />
+      <button class="slider-btn slider-btn-right" :aria-label="nextBtnLabel" @click.stop="next">
+        <i class="slider-icon slider-icon-right" aria-hidden="true"/>
       </button>
     </template>
   </div>
@@ -103,6 +103,14 @@ export default {
     beforeNext: {
       type: Function,
       default: () => true,
+    },
+    prevBtnLabel: {
+      type: String,
+      default: 'Previous slide',
+    },
+    nextBtnLabel: {
+      type: String,
+      default: 'Next slide',
     },
   },
   data() {
