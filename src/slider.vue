@@ -155,6 +155,7 @@ export default {
   deactivated() {
     this.timer && clearInterval(this.timer)
     this.af && this.af.destroy()
+    this.af = null
   },
 
   methods: {
