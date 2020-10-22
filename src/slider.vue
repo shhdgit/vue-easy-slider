@@ -31,10 +31,10 @@
       />
     </div>
     <template v-if="controlBtn">
-      <button class="slider-btn slider-btn-left" :aria-label="prevBtnLabel" @click.stop="prev">
+      <button type="button" class="slider-btn slider-btn-left" :aria-label="prevBtnLabel" @click.stop="prev">
         <i class="slider-icon slider-icon-left" aria-hidden="true"/>
       </button>
-      <button class="slider-btn slider-btn-right" :aria-label="nextBtnLabel" @click.stop="next">
+      <button type="button" class="slider-btn slider-btn-right" :aria-label="nextBtnLabel" @click.stop="next">
         <i class="slider-icon slider-icon-right" aria-hidden="true"/>
       </button>
     </template>
